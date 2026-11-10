@@ -9,6 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 import numpy as np
 from PIL import Image
+from plyfile import PlyData
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -52,8 +53,9 @@ def main():
         assert read(source / 'model/training_config.json')['train_images'] == 96
         trained_cameras = read(source / 'model/cameras.json')
         assert len(trained_cameras) == 96
-        assert {row['img_name'] for row in trained_cameras} == {Path(name).stem for name in splits['train']}
+        assert {row['img_name'] for row in trained_cameras} == set(splits['train'])
         assert read(source / 'model/summary.json')['iteration'] == 30000
+        assert len(PlyData.read(source / 'model/input.ply')['vertex']) == read(source / 'sfm/summary.json')['points3D']
         for directory, iteration in [('evaluation',30000), ('evaluation_7000',7000)]:
             evaluation = read(source / directory / 'summary.json')
             assert evaluation['complete'] and evaluation['iteration'] == iteration
@@ -97,7 +99,10 @@ def main():
             assert 0 < actual <= count
             trained_cameras = read(source / 'model/cameras.json')
             assert len(trained_cameras) == actual
-            assert {row['img_name'] for row in trained_cameras} <= {Path(name).stem for name in splits['train']}
+            assert {row['img_name'] for row in trained_cameras} <= set(splits['train'])
+            geometry = read(source / ('pose_control.json' if label=='gt_poses' else 'sfm/summary.json'))
+            assert actual == (geometry['train_images'] if label=='gt_poses' else geometry['registered_images'])
+            assert len(PlyData.read(source / 'model/input.ply')['vertex']) == geometry['points3D']
             variants[label] = set(splits['train'])
         assert variants['views24'] < variants['views48'] < variants['gt_poses']
         assert read(ROOT / 'outputs/ablations' / f'{slug}_gt_poses/pose_control.json')['same_sparse_initialization']

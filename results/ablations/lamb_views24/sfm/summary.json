@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "train_images": 24,
+  "registered_images": 24,
+  "test_images_used": 0,
+  "points3D": 1787,
+  "mean_reprojection_error_pixels": 0.239145081906128,
+  "median_keypoints": 851.0,
+  "verified_pairs": 114,
+  "median_pair_inliers": 59.5,
+  "center_rmse_object_units": 0.014822861508802434,
+  "median_rotation_error_degrees": 0.11786798289952488,
+  "max_rotation_error_degrees": 0.720991309399146,
+  "matches": [
+    {
+      "first": "r01_v01.png",
+      "second": "r01_v06.png",
+      "verified_matches": 92,
+      "image": "matches/matches_r01_v01_r01_v06.jpg"
+    },
+    {
+      "first": "r01_v11.png",
+      "second": "r01_v16.png",
+      "verified_matches": 138,
+      "image": "matches/matches_r01_v11_r01_v16.jpg"
+    },
+    {
+      "first": "r00_v01.png",
+      "second": "r01_v01.png",
+      "verified_matches": 74,
+      "image": "matches/matches_r00_v01_r01_v01.jpg"
+    },
+    {
+      "first": "r01_v21.png",
+      "second": "r02_v21.png",
+      "verified_matches": 262,
+      "image": "matches/matches_r01_v21_r02_v21.jpg"
+    }
+  ],
+  "elapsed_seconds": 7.24,
+  "initialization": "SIFT image correspondences and COLMAP triangulated points; no GLB surface points or true extrinsics supplied to SfM",
+  "alignment": "Seven-degree-of-freedom similarity fit using training camera centers only"
+}

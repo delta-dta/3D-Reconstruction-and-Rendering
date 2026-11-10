@@ -1,0 +1,9 @@
+{
+  "iteration": 30000,
+  "total": 30000,
+  "loss": 0.0016374174738302827,
+  "l1": 0.0015811403281986713,
+  "gaussians": 183048,
+  "elapsed_seconds": 271.63,
+  "complete": true
+}

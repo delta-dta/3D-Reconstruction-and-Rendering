@@ -73,36 +73,31 @@ def main():
     camera_params = ','.join(str(value) for value in [intrinsic[0,0], intrinsic[1,1], intrinsic[0,2], intrinsic[1,2]])
     database_path = sfm / 'database.db'
     start = time.monotonic()
-    reuse_raw = 'raw_reconstruction' in config['sfm']
-    if reuse_raw:
-        print(json.dumps({'stage': 'export_saved_reconstruction', 'source': config['sfm']['raw_reconstruction']}), flush=True)
-        reconstruction = pycolmap.Reconstruction(config['sfm']['raw_reconstruction'])
-    else:
-        print(json.dumps({'stage': 'extract_features', 'train_images': len(train), 'test_images_used': 0}), flush=True)
-        pycolmap.extract_features(
-            str(database_path), str(data / 'images'),
-            camera_mode=pycolmap.CameraMode.SINGLE, camera_model='PINHOLE',
-            reader_options={'camera_params': camera_params, 'mask_path': str(data / 'colmap_masks')},
-            extraction_options={'num_threads': config['sfm']['threads'], 'use_gpu': False,
-                                'max_image_size': metadata['width'], 'sift': {'max_num_features': config['sfm']['max_num_features']}},
-            device=pycolmap.Device.cpu,
-        )
-        print(json.dumps({'stage': 'match_and_verify'}), flush=True)
-        pycolmap.match_exhaustive(
-            str(database_path),
-            matching_options={'num_threads': config['sfm']['threads'], 'use_gpu': False,
-                              'sift': {'max_ratio': config['sfm']['matching_max_ratio'], 'cross_check': True}},
-            verification_options={'ransac': {'max_error': config['sfm']['verification_max_error']}},
-            device=pycolmap.Device.cpu,
-        )
-        print(json.dumps({'stage': 'incremental_mapping'}), flush=True)
-        options = pycolmap.IncrementalPipelineOptions({
-            'num_threads': config['sfm']['threads'], 'random_seed': config['seed'], 'multiple_models': False,
-            'ba_refine_focal_length': False, 'ba_refine_principal_point': False, 'ba_refine_extra_params': False,
-            'mapper': {'abs_pose_refine_focal_length': False, 'abs_pose_refine_extra_params': False},
-        })
-        maps = pycolmap.incremental_mapping(str(database_path), str(data / 'images'), str(sfm / 'raw'), options=options)
-        reconstruction = maps[0]
+    print(json.dumps({'stage': 'extract_features', 'train_images': len(train), 'test_images_used': 0}), flush=True)
+    pycolmap.extract_features(
+        str(database_path), str(data / 'images'),
+        camera_mode=pycolmap.CameraMode.SINGLE, camera_model='PINHOLE',
+        reader_options={'camera_params': camera_params, 'mask_path': str(data / 'colmap_masks')},
+        extraction_options={'num_threads': config['sfm']['threads'], 'use_gpu': False,
+                            'max_image_size': metadata['width'], 'sift': {'max_num_features': config['sfm']['max_num_features']}},
+        device=pycolmap.Device.cpu,
+    )
+    print(json.dumps({'stage': 'match_and_verify'}), flush=True)
+    pycolmap.match_exhaustive(
+        str(database_path),
+        matching_options={'num_threads': config['sfm']['threads'], 'use_gpu': False,
+                          'sift': {'max_ratio': config['sfm']['matching_max_ratio'], 'cross_check': True}},
+        verification_options={'ransac': {'max_error': config['sfm']['verification_max_error']}},
+        device=pycolmap.Device.cpu,
+    )
+    print(json.dumps({'stage': 'incremental_mapping'}), flush=True)
+    options = pycolmap.IncrementalPipelineOptions({
+        'num_threads': config['sfm']['threads'], 'random_seed': config['seed'], 'multiple_models': False,
+        'ba_refine_focal_length': False, 'ba_refine_principal_point': False, 'ba_refine_extra_params': False,
+        'mapper': {'abs_pose_refine_focal_length': False, 'abs_pose_refine_extra_params': False},
+    })
+    maps = pycolmap.incremental_mapping(str(database_path), str(data / 'images'), str(sfm / 'raw'), options=options)
+    reconstruction = maps[0]
     if config['sfm'].get('require_all_registered', True) and reconstruction.num_reg_images() != len(train):
         raise RuntimeError(f'Only {reconstruction.num_reg_images()} of {len(train)} training images registered.')
     images = sorted(reconstruction.images.values(), key=lambda image: image.name)
@@ -112,6 +107,8 @@ def main():
     reconstruction.transform(pycolmap.Sim3d(scale, pycolmap.Rotation3d(rotation), translation))
     aligned = data / 'sparse' / '0'
     aligned.mkdir(parents=True, exist_ok=True)
+    # The 3DGS reader caches its point conversion; a new SfM export invalidates it.
+    (aligned / 'points3D.ply').unlink(missing_ok=True)
     reconstruction.write(str(aligned))
     reconstruction.write_text(str(sfm / 'aligned_text'))
     reconstruction.export_PLY(str(sfm / 'points_aligned.ply'))
@@ -147,8 +144,7 @@ def main():
         'center_rmse_object_units': float(np.sqrt(np.mean(np.square(center_errors)))),
         'median_rotation_error_degrees': float(np.median(angle_errors)),
         'max_rotation_error_degrees': max(angle_errors), 'matches': examples,
-        'elapsed_seconds': None if reuse_raw else round(time.monotonic() - start, 2),
-        'reused_raw_reconstruction': config['sfm'].get('raw_reconstruction'),
+        'elapsed_seconds': round(time.monotonic() - start, 2),
         'registration_policy': 'all_images_required' if config['sfm'].get('require_all_registered', True) else 'train_registered_subset',
         'initialization': 'SIFT image correspondences and COLMAP triangulated points; no GLB surface points or true extrinsics supplied to SfM',
         'alignment': 'Seven-degree-of-freedom similarity fit using training camera centers only',

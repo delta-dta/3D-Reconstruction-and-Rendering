@@ -2,6 +2,7 @@
 
 import csv
 import gzip
+import io
 from html import escape
 import json
 import os
@@ -74,12 +75,15 @@ def collect(course):
                 assert geometry['same_sparse_initialization']
                 registration = 96
                 error = None
+                rotation_error = 0.0
             else:
                 geometry = read(root / 'sfm/summary.json')
                 registration = geometry['registered_images']
                 error = geometry['mean_reprojection_error_pixels']
+                rotation_error = geometry['median_rotation_error_degrees']
             controls.append({'object': slug, 'condition': kind, 'input_train_views': geometry['train_images'], 'train_views': evaluation['train_views'],
                              'registered_images': registration, 'sparse_points': geometry['points3D'], 'reprojection_error_px': error,
+                             'median_rotation_error_degrees': rotation_error,
                              'psnr': evaluation['mean_psnr'], 'ssim': evaluation['mean_ssim'],
                              'foreground_psnr': evaluation['mean_foreground_psnr'],
                              'gaussians': training['gaussians'], 'training_seconds': training['elapsed_seconds']})
@@ -96,7 +100,9 @@ def export_matching(database_path, output):
             low, high = divmod(pair_id, 2147483647)
             arrays[f'inliers_{pair_id}'] = np.frombuffer(payload, np.uint32).reshape(rows, 2).copy()
             pairs.append({'pair_id': pair_id, 'first': names[low], 'second': names[high], 'inliers': rows})
-    np.savez_compressed(output / 'geometric_matches.npz', **arrays)
+    buffer = io.BytesIO()
+    np.savez_compressed(buffer, **arrays)
+    (output / 'geometric_matches.npz').write_bytes(buffer.getvalue())
     write_csv(output / 'verified_pairs.csv', pairs)
     write_json(output / 'image_ids.json', names)
 
@@ -294,6 +300,8 @@ def matching_case(objects):
 
 def experiment_report(objects, controls):
     by_object = {obj['slug']: obj for obj in objects}
+    robot24 = next(row for row in controls if row['object']=='robot' and row['condition']=='views24')
+    robot48 = next(row for row in controls if row['object']=='robot' and row['condition']=='views48')
     rows = []
     for slug in ['lamb','can','robot']:
         for label, views, result in [('24 views', 24, next(r for r in controls if r['object']==slug and r['condition']=='views24')),
@@ -317,7 +325,7 @@ def experiment_report(objects, controls):
     height_means = {e: float(np.mean([obj['novel_by_height'][e]['foreground_psnr'] for obj in objects])) for e in [0,30,60]}
     text = f'''# 作业 2：对照实验与实际结果
 
-所有条件在运行前写入 `configs/experiments/`。每个条件一次固定种子运行，表中数值来自实际保存的评估文件。各物体内部使用同一测试集；比较时先取每视角指标，再取物体均值。
+图像子集、分辨率与训练预算在运行前写入 `configs/experiments/`。每个条件记录一次固定种子的正式训练结果；机器人 24 图条件在修正最终模型导出后重算，过程见复现说明。表中数值来自实际保存的评估文件。各物体内部使用同一测试集；比较时先取每视角指标，再取物体均值。
 
 ## 1. 图像数量与相机位姿
 
@@ -331,7 +339,7 @@ def experiment_report(objects, controls):
 
 图像数量同时影响视角覆盖、匹配约束、稀疏初始化和每张图被优化的次数；这里测量的是固定迭代预算下整条流程的效果。位姿对照保留 SfM 点云误差和有限优化过程，因此不将它表述为完整几何真值的重建上界。
 
-机器人 24 图输入只注册了 19 个相机，旋转误差中位数约 68.58°，出现明显几何退化。该对照使用这 19 个实际恢复相机继续训练，输入数量和有效训练数量分别记录；不使用真实位姿修补，也不重新挑选一次更好的 SfM 结果。48 图条件虽注册 48/48，相机旋转误差中位数仍约 17.82°，因此注册率本身不足以证明几何正确。指标描述低视图条件下包含 SfM 失败影响的端到端结果。正式机器人基线使用 96/96 相机，旋转误差中位数约 0.079°。
+机器人 24 图输入最终注册了 {robot24['registered_images']} 个相机，旋转误差中位数为 {robot24['median_rotation_error_degrees']:.3f}°，出现明显几何退化。该对照使用最终返回重建中的 {robot24['train_views']} 个相机训练，输入数量和有效训练数量分别记录；未使用真实位姿修补或改变匹配参数。48 图条件注册了 {robot48['registered_images']}/48，相机旋转误差中位数仍为 {robot48['median_rotation_error_degrees']:.3f}°，因此注册率本身不足以证明几何正确。指标描述低视图条件下包含 SfM 失败影响的端到端结果。正式机器人基线使用 96/96 相机，旋转误差中位数约 0.079°。
 
 可[查看机器人 24 图条件](../results/ablations/robot_views24/sfm/viewer.html)、[48 图条件](../results/ablations/robot_views48/sfm/viewer.html)的相机与点云，与[96 图条件](../results/hw2_robot/sfm/viewer.html)对照。
 
@@ -443,6 +451,8 @@ def dashboard(objects, rows, findings):
 
 def course_report(objects, rows, findings):
     submission = read(ROOT / 'configs/submission.json')
+    robot24 = read(ROOT / 'outputs/ablations/robot_views24/sfm/summary.json')
+    robot48 = read(ROOT / 'outputs/ablations/robot_views48/sfm/summary.json')
     members = '\n'.join(f"- {row['name']}：{row['contribution']}" for row in submission['members']) or '成员姓名与实际贡献：待填写。'
     table = markdown_table(['物体','注册图','稀疏点','重投影 px','前景 PSNR','全图 PSNR','SSIM','高斯数'],
         [[row['name'], '96/96', row['sparse_points'], f"{row['reprojection_error_px']:.3f}", f"{row['foreground_psnr']:.3f}",
@@ -519,7 +529,7 @@ flowchart LR
 
 **输入视角数量。** 在羊摆件、罐头、机器人上用相同图像池的 24/48/96 嵌套子集重新运行 SfM 和训练。保持测试集、迭代预算和其他设置一致，24→96 的平均前景 PSNR 变化为 **{findings['view_count_mean_delta_fg_db']:+.3f} dB**。变化来自观测覆盖、匹配约束及稀疏初始化的共同作用。
 
-其中机器人 24 图条件仅有 19 个相机注册，24/48 图条件均发生明显几何退化；48 图虽全部注册，旋转误差中位数仍约 17.82°。这些条件使用实际恢复的相机训练，展示 SfM 失败如何传播至新视角渲染；输入数量与实际训练数量分列，正式 96 图基线正常注册全部相机并恢复正确环绕结构。
+其中机器人 24 图条件注册了 {robot24['registered_images']}/24 个相机，24/48 图条件均发生明显几何退化；48 图的旋转误差中位数为 {robot48['median_rotation_error_degrees']:.3f}°。这些条件使用最终返回重建中的相机训练，展示 SfM 失败如何传播至新视角渲染；输入数量与实际训练数量分列，正式 96 图基线正常注册全部相机并恢复正确环绕结构。
 
 **相机位姿。** 同三个对象保持 96 张训练图和同一稀疏点初始化，只替换成真实训练相机外参。相对于 SfM 位姿，平均前景 PSNR 变化为 **{findings['gt_pose_mean_delta_fg_db']:+.3f} dB**。逐物体数据用于理解位姿误差如何影响纹理和轮廓。
 

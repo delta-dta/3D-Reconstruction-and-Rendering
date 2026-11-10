@@ -6,6 +6,8 @@ export CUDA_CACHE_PATH=/tmp/3dvision-cuda-cache
 export OMP_NUM_THREADS=4
 export OPENBLAS_NUM_THREADS=1
 
+# 编织器物仅保留为匹配歧义案例：前三阶段完成，训练中止，未执行其评估与 GIF。
+# 正式对象由 run_hw2_shoe.sh 中的彩色跑鞋替换。
 # mkdir -p /data/260010047/3d_homework/outputs/hw2_basket/logs
 # LD_LIBRARY_PATH=/data/260010047/3d_homework/.tools/system-libs/usr/lib/x86_64-linux-gnu taskset -c 0,1,2,3 /data/260010047/3d_homework/.tools/blender-4.5.3-linux-x64/blender --background -t 4 --factory-startup --python-exit-code 1 --python /data/260010047/3d_homework/programs/render_hw2.py -- --config /data/260010047/3d_homework/configs/hw2_basket.json > /data/260010047/3d_homework/outputs/hw2_basket/logs/render.log 2>&1
 # /data/260010047/miniconda3/envs/3dvision/bin/python -B /data/260010047/3d_homework/programs/prepare_hw2.py --config /data/260010047/3d_homework/configs/hw2_basket.json > /data/260010047/3d_homework/outputs/hw2_basket/logs/prepare.log 2>&1

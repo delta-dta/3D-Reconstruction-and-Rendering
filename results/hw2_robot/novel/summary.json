@@ -1,0 +1,270 @@
+{
+  "complete": true,
+  "test_views": 36,
+  "train_views": 96,
+  "iteration": 30000,
+  "mean_psnr": 33.85581742392646,
+  "mean_ssim": 0.982672318816185,
+  "mean_foreground_psnr": 28.027255905999077,
+  "gaussians": 153915,
+  "orbit_frames": 0,
+  "gif": null,
+  "model_ply": "/data/260010047/3d_homework/outputs/hw2_robot/model/point_cloud/iteration_30000/point_cloud.ply",
+  "test_camera_source": "Blender ground-truth extrinsics in the train-center-aligned reconstruction coordinate system",
+  "evaluation_scope": "36 held-out views; neither their RGB images nor their camera poses were supplied to SfM or 3DGS training",
+  "metric_definition": "Mean per-view PSNR/SSIM on RGB in [0,1] including white background; foreground PSNR uses the ground-truth alpha>0.5 mask",
+  "per_view": [
+    {
+      "name": "r00_v00.png",
+      "psnr": 34.28858947753906,
+      "ssim": 0.9819788932800293,
+      "foreground_psnr": 27.995893478393555,
+      "foreground_fraction": 0.21492385864257812
+    },
+    {
+      "name": "r00_v01.png",
+      "psnr": 33.70166778564453,
+      "ssim": 0.9793124198913574,
+      "foreground_psnr": 27.972599029541016,
+      "foreground_fraction": 0.25798797607421875
+    },
+    {
+      "name": "r00_v02.png",
+      "psnr": 32.94280242919922,
+      "ssim": 0.9775523543357849,
+      "foreground_psnr": 27.377147674560547,
+      "foreground_fraction": 0.270782470703125
+    },
+    {
+      "name": "r00_v03.png",
+      "psnr": 27.578184127807617,
+      "ssim": 0.9730995893478394,
+      "foreground_psnr": 26.923429489135742,
+      "foreground_fraction": 0.24496841430664062
+    },
+    {
+      "name": "r00_v04.png",
+      "psnr": 35.93442153930664,
+      "ssim": 0.9839481115341187,
+      "foreground_psnr": 30.43104362487793,
+      "foreground_fraction": 0.2721214294433594
+    },
+    {
+      "name": "r00_v05.png",
+      "psnr": 36.61492919921875,
+      "ssim": 0.9869880676269531,
+      "foreground_psnr": 30.634050369262695,
+      "foreground_fraction": 0.24280166625976562
+    },
+    {
+      "name": "r00_v06.png",
+      "psnr": 35.0486946105957,
+      "ssim": 0.9844428896903992,
+      "foreground_psnr": 29.132831573486328,
+      "foreground_fraction": 0.21294021606445312
+    },
+    {
+      "name": "r00_v07.png",
+      "psnr": 34.134742736816406,
+      "ssim": 0.9814534187316895,
+      "foreground_psnr": 28.3912296295166,
+      "foreground_fraction": 0.2538261413574219
+    },
+    {
+      "name": "r00_v08.png",
+      "psnr": 34.189029693603516,
+      "ssim": 0.9798044562339783,
+      "foreground_psnr": 28.62718963623047,
+      "foreground_fraction": 0.2699317932128906
+    },
+    {
+      "name": "r00_v09.png",
+      "psnr": 27.619762420654297,
+      "ssim": 0.9718796610832214,
+      "foreground_psnr": 27.21179962158203,
+      "foreground_fraction": 0.252899169921875
+    },
+    {
+      "name": "r00_v10.png",
+      "psnr": 33.871971130371094,
+      "ssim": 0.9776157140731812,
+      "foreground_psnr": 28.363662719726562,
+      "foreground_fraction": 0.2727775573730469
+    },
+    {
+      "name": "r00_v11.png",
+      "psnr": 31.687061309814453,
+      "ssim": 0.9780403971672058,
+      "foreground_psnr": 25.666181564331055,
+      "foreground_fraction": 0.24304580688476562
+    },
+    {
+      "name": "r01_v00.png",
+      "psnr": 34.0887451171875,
+      "ssim": 0.9831988215446472,
+      "foreground_psnr": 27.573318481445312,
+      "foreground_fraction": 0.20484161376953125
+    },
+    {
+      "name": "r01_v01.png",
+      "psnr": 34.49772262573242,
+      "ssim": 0.9843415021896362,
+      "foreground_psnr": 28.546607971191406,
+      "foreground_fraction": 0.24818801879882812
+    },
+    {
+      "name": "r01_v02.png",
+      "psnr": 35.240962982177734,
+      "ssim": 0.9838290214538574,
+      "foreground_psnr": 29.60751724243164,
+      "foreground_fraction": 0.2574729919433594
+    },
+    {
+      "name": "r01_v03.png",
+      "psnr": 34.009098052978516,
+      "ssim": 0.9833151698112488,
+      "foreground_psnr": 28.86428451538086,
+      "foreground_fraction": 0.24158096313476562
+    },
+    {
+      "name": "r01_v04.png",
+      "psnr": 36.13835906982422,
+      "ssim": 0.9854773879051208,
+      "foreground_psnr": 30.377321243286133,
+      "foreground_fraction": 0.2589569091796875
+    },
+    {
+      "name": "r01_v05.png",
+      "psnr": 36.40129470825195,
+      "ssim": 0.9870551824569702,
+      "foreground_psnr": 30.27153778076172,
+      "foreground_fraction": 0.233062744140625
+    },
+    {
+      "name": "r01_v06.png",
+      "psnr": 36.09128189086914,
+      "ssim": 0.9869931936264038,
+      "foreground_psnr": 30.00031280517578,
+      "foreground_fraction": 0.203704833984375
+    },
+    {
+      "name": "r01_v07.png",
+      "psnr": 35.804603576660156,
+      "ssim": 0.986716628074646,
+      "foreground_psnr": 29.985055923461914,
+      "foreground_fraction": 0.244537353515625
+    },
+    {
+      "name": "r01_v08.png",
+      "psnr": 35.60485076904297,
+      "ssim": 0.9849214553833008,
+      "foreground_psnr": 29.860328674316406,
+      "foreground_fraction": 0.2568168640136719
+    },
+    {
+      "name": "r01_v09.png",
+      "psnr": 32.547210693359375,
+      "ssim": 0.9808530211448669,
+      "foreground_psnr": 27.551515579223633,
+      "foreground_fraction": 0.24566650390625
+    },
+    {
+      "name": "r01_v10.png",
+      "psnr": 35.68334197998047,
+      "ssim": 0.9860135912895203,
+      "foreground_psnr": 29.952796936035156,
+      "foreground_fraction": 0.2594642639160156
+    },
+    {
+      "name": "r01_v11.png",
+      "psnr": 34.60997009277344,
+      "ssim": 0.9859685897827148,
+      "foreground_psnr": 28.447664260864258,
+      "foreground_fraction": 0.23192596435546875
+    },
+    {
+      "name": "r02_v00.png",
+      "psnr": 32.84775161743164,
+      "ssim": 0.9827820658683777,
+      "foreground_psnr": 25.717082977294922,
+      "foreground_fraction": 0.18500518798828125
+    },
+    {
+      "name": "r02_v01.png",
+      "psnr": 32.53854751586914,
+      "ssim": 0.9826852083206177,
+      "foreground_psnr": 25.727306365966797,
+      "foreground_fraction": 0.20636749267578125
+    },
+    {
+      "name": "r02_v02.png",
+      "psnr": 32.58723068237305,
+      "ssim": 0.9816431403160095,
+      "foreground_psnr": 25.93792152404785,
+      "foreground_fraction": 0.21132659912109375
+    },
+    {
+      "name": "r02_v03.png",
+      "psnr": 32.802345275878906,
+      "ssim": 0.9821164011955261,
+      "foreground_psnr": 26.36012077331543,
+      "foreground_fraction": 0.20853805541992188
+    },
+    {
+      "name": "r02_v04.png",
+      "psnr": 34.471439361572266,
+      "ssim": 0.985166072845459,
+      "foreground_psnr": 27.797269821166992,
+      "foreground_fraction": 0.21162796020507812
+    },
+    {
+      "name": "r02_v05.png",
+      "psnr": 34.94240951538086,
+      "ssim": 0.9865970611572266,
+      "foreground_psnr": 27.979434967041016,
+      "foreground_fraction": 0.19787979125976562
+    },
+    {
+      "name": "r02_v06.png",
+      "psnr": 35.05552673339844,
+      "ssim": 0.9856886863708496,
+      "foreground_psnr": 27.86893081665039,
+      "foreground_fraction": 0.18426895141601562
+    },
+    {
+      "name": "r02_v07.png",
+      "psnr": 33.7568359375,
+      "ssim": 0.9848569631576538,
+      "foreground_psnr": 26.938440322875977,
+      "foreground_fraction": 0.20441436767578125
+    },
+    {
+      "name": "r02_v08.png",
+      "psnr": 33.55119705200195,
+      "ssim": 0.9827143549919128,
+      "foreground_psnr": 26.923046112060547,
+      "foreground_fraction": 0.2096405029296875
+    },
+    {
+      "name": "r02_v09.png",
+      "psnr": 32.27049255371094,
+      "ssim": 0.9816336035728455,
+      "foreground_psnr": 25.96797752380371,
+      "foreground_fraction": 0.20842742919921875
+    },
+    {
+      "name": "r02_v10.png",
+      "psnr": 33.11967086791992,
+      "ssim": 0.9832631349563599,
+      "foreground_psnr": 26.42734146118164,
+      "foreground_fraction": 0.2103271484375
+    },
+    {
+      "name": "r02_v11.png",
+      "psnr": 32.53668212890625,
+      "ssim": 0.9822572469711304,
+      "foreground_psnr": 25.571020126342773,
+      "foreground_fraction": 0.1973114013671875
+    }
+  ]
+}

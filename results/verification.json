@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "objects": 10,
+  "registered_cameras": 960,
+  "gifs_72_frames": 10,
+  "control_trainings": 9,
+  "novel_test_views": 360,
+  "verified_pairs_exported": 20210,
+  "geometric_inliers_exported": 2264799,
+  "local_html_links_checked": 547,
+  "data_separation": "96/24 disjoint; subset tests identical; new elevations excluded from training"
+}

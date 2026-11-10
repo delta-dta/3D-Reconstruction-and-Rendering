@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "experiment": "ground-truth training poses",
+  "train_images": 96,
+  "test_images_used": 0,
+  "same_sparse_initialization": true,
+  "points3D": 7487,
+  "source_output_dir": "/data/260010047/3d_homework/outputs/hw2_can"
+}

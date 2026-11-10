@@ -1,0 +1,17 @@
+{
+  "python": "3.12.3",
+  "python_executable": "/data/260010047/miniconda3/envs/3dvision/bin/python",
+  "torch": "2.8.0+cu129",
+  "cuda_runtime": "12.9",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "pycolmap": "3.13.0",
+  "sfm_device": "CPU",
+  "training_device": "CUDA sm_120",
+  "repositories": {
+    "3dgs": "54c035f7834b564019656c3e3fcc3646292f727d",
+    "rasterizer": "9c5c2028f6fbee2be239bc4c9421ff894fe4fbe0",
+    "simple_knn": "86710c2d4b46680c02301765dd79e465819c8f19",
+    "fused_ssim": "1272e21a282342e89537159e4bad508b19b34157"
+  },
+  "local_patch": "patches/gaussian_rasterizer_cuda129.patch"
+}

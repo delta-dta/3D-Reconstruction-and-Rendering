@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>装饰陶壶：完整重建结果</title><style>body{font:16px/1.7 system-ui,sans-serif;max-width:1240px;margin:32px auto;padding:0 20px;color:#24313b;background:#f8fafb}
+a{color:#175d87}h1{font-size:32px;line-height:1.25}h2{margin-top:36px}img{max-width:100%;height:auto;background:white}
+table{width:100%;border-collapse:collapse;background:white;font-size:14px}th,td{padding:8px;border-bottom:1px solid #dbe3e7;text-align:left}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}.card{background:#fff;padding:18px;border:1px solid #dce4e8;border-radius:9px}
+.card img{width:100%}.card h3{margin:0}.sub{color:#576974;font-size:14px}.stats{display:flex;gap:16px;flex-wrap:wrap}.stats div{padding:15px 24px;background:#e9f1f1;border-radius:7px}
+nav a{display:inline-block;margin:5px 18px 5px 0}.tablewrap{overflow-x:auto}iframe{width:100%;height:730px;border:1px solid #dce4e8}
+button{padding:8px 14px;margin:8px 8px 15px 0;border:1px solid #afc5cc;background:white;border-radius:5px;cursor:pointer}.active{background:#28636b;color:white}
+code{font-size:13px;overflow-wrap:anywhere}@media print{body{max-width:none;background:white}nav,button{display:none}.card{break-inside:avoid}}</style><body>
+<nav><a href="../../index.html">课程总览</a><a href="../../docs/LEARNING_GUIDE.md">学习指南</a></nav>
+<h1>装饰陶壶</h1><p class="sub">UID：<code>a904a1c301f84bbb8af232dd612d436d</code> · SfM 初始化 → 官方 3DGS</p>
+<img src="reconstruction.gif" width="512" alt="训练后的高斯模型环绕动画">
+<p>96 张训练 / 24 张测试；相机注册 96/96；稀疏点 9,068；重投影误差 0.282 px。</p>
+<p>30,000 步，179,200 个高斯；全图 PSNR 25.864 dB，SSIM 0.93640，前景 PSNR 18.923 dB。</p>
+<nav><a href="summary.json">完整统计</a><a href="model/training_config.json">训练参数</a><a href="model/loss.csv">损失</a><a href="data/splits.json">划分</a><a href="data/metadata.json">标定与真实相机</a><a href="environment.json">环境</a></nav>
+<h2>输入图像与多角度重建</h2><img loading="lazy" src="dataset_overview.jpg" alt="输入图像"><img loading="lazy" src="reconstruction_overview.jpg" alt="八视角重建">
+<h2>几何验证后的特征匹配</h2><p>每张图最多画 80 条线，标题和下表记录全部几何验证内点数量。</p>
+<p>r01_v01.png ↔ r01_v02.png：672 个内点。</p><img loading="lazy" src="sfm/matches/matches_r01_v01_r01_v02.jpg" alt="实际特征匹配">
+<p>r01_v11.png ↔ r01_v14.png：261 个内点。</p><img loading="lazy" src="sfm/matches/matches_r01_v11_r01_v14.jpg" alt="实际特征匹配">
+<p>r00_v01.png ↔ r01_v01.png：219 个内点。</p><img loading="lazy" src="sfm/matches/matches_r00_v01_r01_v01.jpg" alt="实际特征匹配">
+<p>r01_v21.png ↔ r02_v21.png：211 个内点。</p><img loading="lazy" src="sfm/matches/matches_r01_v21_r02_v21.jpg" alt="实际特征匹配">
+<nav><a href="sfm/verified_pairs.csv">全部验证图像对</a><a href="sfm/geometric_matches.npz">关键点与全部内点数组</a><a href="sfm/image_ids.json">图像 ID</a><a href="../../docs/MATCHING_FORMAT.md">读取方法</a></nav>
+<h2>交互式 SfM 点云与相机</h2><iframe loading="lazy" src="sfm/viewer.html" title="点云与相机"></iframe>
+<h2>24 张固定留出图像</h2><p>点击视角可查看真实图像、预测图像及放大的误差。</p><table><tr><th>视角</th><th>前景 PSNR</th><th>全图 PSNR</th><th>SSIM</th></tr>
+<tr><td><a href="evaluation/comparisons/r00_v00.jpg">r00_v00.png</a></td><td>22.568</td><td>29.032</td><td>0.95405</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v05.jpg">r00_v05.png</a></td><td>18.608</td><td>25.006</td><td>0.91981</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v10.jpg">r00_v10.png</a></td><td>16.355</td><td>22.937</td><td>0.89640</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v15.jpg">r00_v15.png</a></td><td>15.403</td><td>22.225</td><td>0.89285</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v20.jpg">r00_v20.png</a></td><td>15.519</td><td>22.415</td><td>0.89818</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v25.jpg">r00_v25.png</a></td><td>16.784</td><td>23.580</td><td>0.91472</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v30.jpg">r00_v30.png</a></td><td>19.376</td><td>25.885</td><td>0.93768</td></tr>
+<tr><td><a href="evaluation/comparisons/r00_v35.jpg">r00_v35.png</a></td><td>22.368</td><td>28.535</td><td>0.95555</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v00.jpg">r01_v00.png</a></td><td>19.121</td><td>26.039</td><td>0.93266</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v05.jpg">r01_v05.png</a></td><td>17.463</td><td>24.244</td><td>0.92307</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v10.jpg">r01_v10.png</a></td><td>16.643</td><td>23.475</td><td>0.92164</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v15.jpg">r01_v15.png</a></td><td>17.138</td><td>24.056</td><td>0.93633</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v20.jpg">r01_v20.png</a></td><td>17.198</td><td>24.290</td><td>0.93961</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v25.jpg">r01_v25.png</a></td><td>17.104</td><td>23.951</td><td>0.92984</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v30.jpg">r01_v30.png</a></td><td>17.289</td><td>24.039</td><td>0.92224</td></tr>
+<tr><td><a href="evaluation/comparisons/r01_v35.jpg">r01_v35.png</a></td><td>18.812</td><td>25.439</td><td>0.92991</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v00.jpg">r02_v00.png</a></td><td>19.722</td><td>27.244</td><td>0.94520</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v05.jpg">r02_v05.png</a></td><td>19.292</td><td>26.801</td><td>0.95044</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v10.jpg">r02_v10.png</a></td><td>20.191</td><td>27.480</td><td>0.95869</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v15.jpg">r02_v15.png</a></td><td>24.208</td><td>31.546</td><td>0.98259</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v20.jpg">r02_v20.png</a></td><td>25.094</td><td>32.705</td><td>0.98677</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v25.jpg">r02_v25.png</a></td><td>20.431</td><td>27.719</td><td>0.96263</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v30.jpg">r02_v30.png</a></td><td>18.505</td><td>25.742</td><td>0.94115</td></tr>
+<tr><td><a href="evaluation/comparisons/r02_v35.jpg">r02_v35.png</a></td><td>18.970</td><td>26.360</td><td>0.94151</td></tr>
+</table><h2>训练时长与新高度测试</h2>
+<p>7,000 步前景 PSNR：18.876 dB。<a href="evaluation_7000/comparisons/r01_v00.jpg">7k 对照图</a> · <a href="evaluation/comparisons/r01_v00.jpg">30k 同视角对照图</a>。</p>
+<table><tr><th>独立测试高度</th><th>视角数</th><th>前景 PSNR</th><th>全图 PSNR</th><th>示例</th></tr>
+<tr><td>0°</td><td>12</td><td>16.976</td><td>23.655</td><td><a href="novel/r00_v00.jpg">对照图</a></td></tr>
+<tr><td>30°</td><td>12</td><td>18.972</td><td>26.026</td><td><a href="novel/r01_v00.jpg">对照图</a></td></tr>
+<tr><td>60°</td><td>12</td><td>21.883</td><td>29.693</td><td><a href="novel/r02_v00.jpg">对照图</a></td></tr>
+</table><p>0°/30°位于训练高度之间，60°超过训练最高高度。所有测试图像未参与训练。<a href="novel/summary.json">逐视角指标</a></p>
+<p>本页为可提交的紧凑结果。原始数据、SQLite 数据库、高斯 PLY、训练检查点和全部 PNG 保存在本地 outputs/ 对应目录。</p></body></html>

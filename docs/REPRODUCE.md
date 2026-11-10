@@ -66,7 +66,11 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 
 位姿对照保持相同稀疏点，只设置真实训练外参。新高度评估通过 `model_dir` 明确读取主实验模型，并在独立目录保存图像与指标。
 
-机器人 24 图条件观察到 19 个相机注册及几何退化。该条件明确设置 `require_all_registered=false`，训练只读取稀疏模型中实际注册的相机；输入图仍保留 24 张，测试集不变。规范的 `robot_views24.json` 可从图像重新执行 SfM。`robot_views24_export.json` 记录本次从已有 `sfm/raw/0` 恢复导出的设置，仅用于复用这次保存的原始结果；首次全新执行应使用规范配置。首次触发全部注册检查的日志保留为 `sfm_initial.log`。
+机器人 24 图条件观察到部分相机未注册及几何退化。该条件明确设置 `require_all_registered=false`，训练只读取 SfM 最终返回模型中的相机；输入图仍保留 24 张，测试集不变。`robot_views24.json` 从图像执行 SfM，输出到 `data/sparse/0`，供训练使用。
+
+本次校验发现 COLMAP 的 `sfm/raw/0` 中间落盘模型与最终返回对象的相机数量不同，因此统一使用 API 最终返回对象导出；不能用 `raw/0` 替代训练输入。重新执行 SfM 时会清除 3DGS 的 `points3D.ply` 转换缓存，避免相机更新后仍使用旧点云。实际训练数量同时核对 `model/cameras.json`。首次触发全部注册检查的日志保留为 `sfm_initial.log`，修正后的单条件重算命令在 `scripts/rerun_robot_views24.sh`。
+
+机器人 48 图条件虽全部注册，仍有明显几何退化；各条件均保留实际恢复结果继续训练，统一在留出图像评估。正式 96 图基线恢复正确环绕相机结构。
 
 ## 新环境搭建
 

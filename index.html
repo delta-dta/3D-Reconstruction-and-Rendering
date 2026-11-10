@@ -1,0 +1,44 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>三维视觉课程作业：清洗、重建与实验</title><style>body{font:16px/1.7 system-ui,sans-serif;max-width:1240px;margin:32px auto;padding:0 20px;color:#24313b;background:#f8fafb}
+a{color:#175d87}h1{font-size:32px;line-height:1.25}h2{margin-top:36px}img{max-width:100%;height:auto;background:white}
+table{width:100%;border-collapse:collapse;background:white;font-size:14px}th,td{padding:8px;border-bottom:1px solid #dbe3e7;text-align:left}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}.card{background:#fff;padding:18px;border:1px solid #dce4e8;border-radius:9px}
+.card img{width:100%}.card h3{margin:0}.sub{color:#576974;font-size:14px}.stats{display:flex;gap:16px;flex-wrap:wrap}.stats div{padding:15px 24px;background:#e9f1f1;border-radius:7px}
+nav a{display:inline-block;margin:5px 18px 5px 0}.tablewrap{overflow-x:auto}iframe{width:100%;height:730px;border:1px solid #dce4e8}
+button{padding:8px 14px;margin:8px 8px 15px 0;border:1px solid #afc5cc;background:white;border-radius:5px;cursor:pointer}.active{background:#28636b;color:white}
+code{font-size:13px;overflow-wrap:anywhere}@media print{body{max-width:none;background:white}nav,button{display:none}.card{break-inside:avoid}}</style><body>
+<h1>从 Objaverse 清洗到三维高斯重建</h1>
+<p>作业 1 的 55,000 个资产清洗，以及作业 2 的 10 个物体重建、匹配、环绕动画与流程对照实验。</p>
+<nav><a href="docs/COURSE_REPORT.md">课程报告</a><a href="docs/ASSIGNMENT1.md">作业 1 报告</a><a href="docs/EXPERIMENTS.md">对照实验</a><a href="docs/MATCHING_CASE.md">匹配歧义案例</a><a href="docs/LEARNING_GUIDE.md">学习指南</a><a href="docs/REPRODUCE.md">复现</a><a href="docs/PROMPTS.md">提示词</a><a href="docs/ASSET_CREDITS.md">资产署名</a></nav>
+<div class="stats"><div><b>7,819</b><br>清洗后资产</div><div><b>10 / 10</b><br>完整重建与 GIF</div><div><b>960 / 960</b><br>训练相机注册</div><div><b>9</b><br>额外对照训练</div><div><b>360</b><br>新高度测试图</div></div>
+<h2>10 个物体的重建结果</h2><p>每个物体使用独立模型。点击进入，可查看全部匹配、测试图像对照及交互式 SfM 点云。</p><div class="grid">
+<article class="card"><h3><a href="results/hw2_shell/index.html">贝壳标本</a></h3><img loading="lazy" src="results/hw2_shell/reconstruction.gif" alt="贝壳标本重建动画"><p class="sub">前景 PSNR 32.71 dB · SSIM 0.9927</p><a href="results/hw2_shell/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_can/index.html">食品罐头</a></h3><img loading="lazy" src="results/hw2_can/reconstruction.gif" alt="食品罐头重建动画"><p class="sub">前景 PSNR 32.14 dB · SSIM 0.9914</p><a href="results/hw2_can/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_shoe/index.html">彩色跑鞋</a></h3><img loading="lazy" src="results/hw2_shoe/reconstruction.gif" alt="彩色跑鞋重建动画"><p class="sub">前景 PSNR 32.19 dB · SSIM 0.9913</p><a href="results/hw2_shoe/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_brain/index.html">解剖教学模型</a></h3><img loading="lazy" src="results/hw2_brain/reconstruction.gif" alt="解剖教学模型重建动画"><p class="sub">前景 PSNR 29.40 dB · SSIM 0.9832</p><a href="results/hw2_brain/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_stone/index.html">石质渔具</a></h3><img loading="lazy" src="results/hw2_stone/reconstruction.gif" alt="石质渔具重建动画"><p class="sub">前景 PSNR 38.05 dB · SSIM 0.9964</p><a href="results/hw2_stone/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_candle/index.html">彩绘蜡烛</a></h3><img loading="lazy" src="results/hw2_candle/reconstruction.gif" alt="彩绘蜡烛重建动画"><p class="sub">前景 PSNR 34.48 dB · SSIM 0.9915</p><a href="results/hw2_candle/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_jug/index.html">装饰陶壶</a></h3><img loading="lazy" src="results/hw2_jug/reconstruction.gif" alt="装饰陶壶重建动画"><p class="sub">前景 PSNR 18.92 dB · SSIM 0.9364</p><a href="results/hw2_jug/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_owl/index.html">猫头鹰摆件</a></h3><img loading="lazy" src="results/hw2_owl/reconstruction.gif" alt="猫头鹰摆件重建动画"><p class="sub">前景 PSNR 32.27 dB · SSIM 0.9864</p><a href="results/hw2_owl/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_robot/index.html">机器人模型</a></h3><img loading="lazy" src="results/hw2_robot/reconstruction.gif" alt="机器人模型重建动画"><p class="sub">前景 PSNR 30.87 dB · SSIM 0.9881</p><a href="results/hw2_robot/index.html">匹配、点云与指标 →</a></article>
+<article class="card"><h3><a href="results/hw2_lamb/index.html">羊形陶质摆件</a></h3><img loading="lazy" src="results/hw2_lamb/reconstruction.gif" alt="羊形陶质摆件重建动画"><p class="sub">前景 PSNR 37.94 dB · SSIM 0.9954</p><a href="results/hw2_lamb/index.html">匹配、点云与指标 →</a></article>
+</div><h2>逐物体指标</h2><button class="active" data-mode="fg">前景 PSNR</button><button data-mode="full">全图 PSNR</button>
+<div class="tablewrap"><table id="metrics"><thead><tr><th>物体</th><th>注册</th><th>稀疏点</th><th>重投影 px</th><th id="metric-title">前景 PSNR</th><th>SSIM</th><th>高斯数</th></tr></thead><tbody>
+<tr><td>贝壳标本</td><td>96/96</td><td>10,237</td><td>0.297</td><td class="psnr" data-fg="32.708" data-full="39.905">32.708</td><td>0.99271</td><td>80,944</td></tr>
+<tr><td>食品罐头</td><td>96/96</td><td>7,487</td><td>0.357</td><td class="psnr" data-fg="32.143" data-full="36.441">32.143</td><td>0.99139</td><td>211,790</td></tr>
+<tr><td>彩色跑鞋</td><td>96/96</td><td>4,746</td><td>0.369</td><td class="psnr" data-fg="32.187" data-full="38.016">32.187</td><td>0.99131</td><td>105,150</td></tr>
+<tr><td>解剖教学模型</td><td>96/96</td><td>8,995</td><td>0.364</td><td class="psnr" data-fg="29.397" data-full="35.575">29.397</td><td>0.98317</td><td>84,515</td></tr>
+<tr><td>石质渔具</td><td>96/96</td><td>13,103</td><td>0.243</td><td class="psnr" data-fg="38.047" data-full="43.505">38.047</td><td>0.99638</td><td>120,992</td></tr>
+<tr><td>彩绘蜡烛</td><td>96/96</td><td>8,562</td><td>0.336</td><td class="psnr" data-fg="34.476" data-full="38.909">34.476</td><td>0.99153</td><td>178,410</td></tr>
+<tr><td>装饰陶壶</td><td>96/96</td><td>9,068</td><td>0.282</td><td class="psnr" data-fg="18.923" data-full="25.864">18.923</td><td>0.93640</td><td>179,200</td></tr>
+<tr><td>猫头鹰摆件</td><td>96/96</td><td>9,242</td><td>0.319</td><td class="psnr" data-fg="32.266" data-full="37.674">32.266</td><td>0.98645</td><td>97,462</td></tr>
+<tr><td>机器人模型</td><td>96/96</td><td>10,610</td><td>0.285</td><td class="psnr" data-fg="30.866" data-full="36.292">30.866</td><td>0.98811</td><td>153,915</td></tr>
+<tr><td>羊形陶质摆件</td><td>96/96</td><td>6,977</td><td>0.320</td><td class="psnr" data-fg="37.944" data-full="43.811">37.944</td><td>0.99538</td><td>60,362</td></tr>
+</tbody></table></div><p><a href="results/metrics.csv">下载全部指标 CSV</a> · <a href="results/course_summary.json">全课程统计</a></p>
+<h2>流程影响分析</h2>
+<p>训练 7k→30k 的前景 PSNR 平均变化：+1.335 dB；三个代表物体 24→96 视图的变化：+11.981 dB；SfM→真实位姿对照变化：+3.483 dB。</p>
+<img loading="lazy" src="results/figures/ablation_results.png" alt="视图数、位姿、训练时长对照"><p><a href="docs/EXPERIMENTS.md">实验设置、逐项数据与分析</a></p>
+<img loading="lazy" src="results/figures/novel_elevations.png" alt="新高度评估"><img loading="lazy" src="results/figures/training_loss.png" alt="训练损失曲线">
+<h2>作业 1 结果</h2><p>55,000 → 44,597 → 31,614 → 31,607 → 17,150 → 7,819。原始 GLB 保持原路径，输出清单与 SHA。</p>
+<nav><a href="results/assignment1/cleaned_models.csv">清洗 CSV</a><a href="results/assignment1/cleaned_uids.txt">UID 清单</a><a href="results/assignment1/summary.json">清洗统计</a></nav>
+<p>组号、成员分工和 GitHub 地址尚未确定，填写 configs/submission.json 后可重新生成报告。正式提交项见 docs/SUBMISSION.md。</p>
+<script>document.querySelectorAll('button[data-mode]').forEach(button=>button.onclick=()=>{document.querySelectorAll('button[data-mode]').forEach(b=>b.classList.toggle('active',b===button));document.getElementById('metric-title').textContent=button.dataset.mode==='fg'?'前景 PSNR':'全图 PSNR';document.querySelectorAll('td.psnr').forEach(cell=>cell.textContent=cell.dataset[button.dataset.mode]);});</script></body></html>

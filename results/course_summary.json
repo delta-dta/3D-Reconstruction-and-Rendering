@@ -1,0 +1,45 @@
+{
+  "experiments_complete": true,
+  "assignment1": {
+    "input_count": 55000,
+    "coarse_kept": 44597,
+    "material_kept": 31614,
+    "rendered_count": 31607,
+    "texture_passed": 17150,
+    "duplicates": 0,
+    "cleaned_count": 7819,
+    "hw2_selected_count": 10
+  },
+  "baseline_objects": 10,
+  "registered_cameras": 960,
+  "gifs": 10,
+  "gif_frames_each": 72,
+  "baseline_train_views_each": 96,
+  "baseline_test_views_each": 24,
+  "control_trainings": 9,
+  "checkpoint_evaluations": 20,
+  "novel_test_views": 360,
+  "evaluation_reports": 39,
+  "averages": {
+    "psnr": 37.5992146174113,
+    "ssim": 0.9852826103568079,
+    "foreground_psnr": 31.89571926196416,
+    "reprojection_error_px": 0.317302219028464,
+    "training_seconds": 201.53000000000003
+  },
+  "findings": {
+    "view_count_mean_delta_fg_db": 11.981112579504648,
+    "gt_pose_mean_delta_fg_db": 3.4830637772878,
+    "iteration_mean_delta_fg_db": 1.3353879928588868,
+    "novel_height_mean_fg_db": {
+      "0": 29.43802501360575,
+      "30": 30.784963242212932,
+      "60": 29.835337130228673
+    }
+  },
+  "submission": {
+    "group_number": "待填写",
+    "members": [],
+    "github_url": "待填写"
+  }
+}

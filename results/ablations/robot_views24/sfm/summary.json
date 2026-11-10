@@ -1,0 +1,44 @@
+{
+  "complete": true,
+  "train_images": 24,
+  "registered_images": 24,
+  "test_images_used": 0,
+  "points3D": 1517,
+  "mean_reprojection_error_pixels": 0.6318263634802839,
+  "median_keypoints": 1173.5,
+  "verified_pairs": 173,
+  "median_pair_inliers": 43.0,
+  "center_rmse_object_units": 3.2014807981162123,
+  "median_rotation_error_degrees": 66.97550083606015,
+  "max_rotation_error_degrees": 151.41066682127095,
+  "matches": [
+    {
+      "first": "r01_v01.png",
+      "second": "r01_v06.png",
+      "verified_matches": 72,
+      "image": "matches/matches_r01_v01_r01_v06.jpg"
+    },
+    {
+      "first": "r01_v11.png",
+      "second": "r01_v16.png",
+      "verified_matches": 65,
+      "image": "matches/matches_r01_v11_r01_v16.jpg"
+    },
+    {
+      "first": "r00_v01.png",
+      "second": "r01_v01.png",
+      "verified_matches": 303,
+      "image": "matches/matches_r00_v01_r01_v01.jpg"
+    },
+    {
+      "first": "r01_v21.png",
+      "second": "r02_v21.png",
+      "verified_matches": 224,
+      "image": "matches/matches_r01_v21_r02_v21.jpg"
+    }
+  ],
+  "elapsed_seconds": 5.0,
+  "registration_policy": "train_registered_subset",
+  "initialization": "SIFT image correspondences and COLMAP triangulated points; no GLB surface points or true extrinsics supplied to SfM",
+  "alignment": "Seven-degree-of-freedom similarity fit using training camera centers only"
+}
