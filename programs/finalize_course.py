@@ -114,9 +114,12 @@ def compact_results(objects, controls):
     for name in ['summary.json', 'cleaned_models.jsonl', 'cleaned_models.csv', 'cleaned_uids.txt', 'hw2_candidates.jsonl']:
         copy(ROOT / 'cleaned' / name, bank / name)
     selected = [json.loads(line) for line in (ROOT / 'cleaned/hw2_candidates.jsonl').read_text().splitlines()]
+    selected_uids = {row['uid'] for row in selected}
+    case = next(row for row in map(json.loads, (ROOT / 'cleaned/cleaned_models.jsonl').read_text().splitlines())
+                if row['uid'] == '5bda8ef98bfb4a908bd671b248ee22ba')
     credits = []
     metadata = {}
-    for row in selected:
+    for row in [*selected, case]:
         if row['shard'] not in metadata:
             with gzip.open(Path('/mnt/aoss/datasets/Objaversev1.0/metadata') / (row['shard'] + '.json.gz'), 'rt') as source:
                 metadata[row['shard']] = json.load(source)
@@ -126,10 +129,11 @@ def compact_results(objects, controls):
                         'creator': user.get('displayName', user.get('username', '元数据未提供')),
                         'source_url': record.get('viewerUrl', 'https://sketchfab.com/3d-models/' + row['uid']),
                         'sha256': row['sha256'], 'shard': row['shard']})
-        copy(ROOT / 'cleaned' / row['preview'], bank / row['preview'])
+        if row['uid'] in selected_uids:
+            copy(ROOT / 'cleaned' / row['preview'], bank / row['preview'])
     write_json(RESULTS / 'asset_credits.json', credits)
     write_csv(RESULTS / 'asset_credits.csv', credits)
-    (DOCS / 'ASSET_CREDITS.md').write_text('# 资产来源与署名\n\n许可代码来自原始元数据，源链接指向对应资产。模型名称与作者按元数据保留；本项目对模型进行了归一化、多视角渲染和高斯重建。\n\n' + markdown_table(
+    (DOCS / 'ASSET_CREDITS.md').write_text('# 资产来源与署名\n\n许可代码来自原始元数据，源链接指向对应资产。前 10 项是正式对象，末项是匹配歧义案例。模型名称与作者按元数据保留；本项目对模型进行了归一化、多视角渲染和高斯重建。\n\n' + markdown_table(
         ['名称', '作者', '许可代码', '源资产', 'UID'],
         [[row['name'].replace('|', '\\|'), row['creator'].replace('|', '\\|'), row['license_code'],
           f"[来源]({row['source_url']})", row['uid']] for row in credits]) + '\n')

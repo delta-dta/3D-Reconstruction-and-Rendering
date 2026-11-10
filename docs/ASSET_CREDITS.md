@@ -1,6 +1,6 @@
 # 资产来源与署名
 
-许可代码来自原始元数据，源链接指向对应资产。模型名称与作者按元数据保留；本项目对模型进行了归一化、多视角渲染和高斯重建。
+许可代码来自原始元数据，源链接指向对应资产。前 10 项是正式对象，末项是匹配歧义案例。模型名称与作者按元数据保留；本项目对模型进行了归一化、多视角渲染和高斯重建。
 
 | 名称 | 作者 | 许可代码 | 源资产 | UID |
 |---|---|---|---|---|
@@ -14,3 +14,4 @@
 | Owl Figure | Echonium | by-nc | [来源](https://sketchfab.com/3d-models/040143111d264848949bee737058b83c) | 040143111d264848949bee737058b83c |
 | TimRobot | MarkMallow | by | [来源](https://sketchfab.com/3d-models/502ba288b5ff45acacf0e8ca85e57774) | 502ba288b5ff45acacf0e8ca85e57774 |
 | Lamb statuette. Photogrametry | Dmytro Rohovyi | by | [来源](https://sketchfab.com/3d-models/97989d443ac048acb6bb42a2f82c6324) | 97989d443ac048acb6bb42a2f82c6324 |
+| Takinan | eeelabvisual | by | [来源](https://sketchfab.com/3d-models/5bda8ef98bfb4a908bd671b248ee22ba) | 5bda8ef98bfb4a908bd671b248ee22ba |

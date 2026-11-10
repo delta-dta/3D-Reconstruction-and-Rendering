@@ -88,5 +88,14 @@
     "source_url": "https://sketchfab.com/3d-models/97989d443ac048acb6bb42a2f82c6324",
     "sha256": "40f6d0ec8fda48837b1c8a77dfd877b1b694cbe780f040284f4fd4937923b2da",
     "shard": "000-000"
+  },
+  {
+    "uid": "5bda8ef98bfb4a908bd671b248ee22ba",
+    "name": "Takinan",
+    "license_code": "by",
+    "creator": "eeelabvisual",
+    "source_url": "https://sketchfab.com/3d-models/5bda8ef98bfb4a908bd671b248ee22ba",
+    "sha256": "583ddb826b4d081ec6e2cf825632436658df48d732acd63de2e453d453dd2707",
+    "shard": "000-001"
   }
 ]
