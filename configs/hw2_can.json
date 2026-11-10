@@ -1,0 +1,53 @@
+{
+  "uid": "056e0c896ce34f13b92dca2c39de44d0",
+  "name": "食品罐头",
+  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
+  "output_dir": "/data/260010047/3d_homework/outputs/hw2_can",
+  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "seed": 20261106,
+  "render": {
+    "resolution": 512,
+    "samples": 64,
+    "denoising": true,
+    "texture_limit": "2048",
+    "cpu_threads": 4,
+    "elevations_degrees": [
+      -20,
+      15,
+      45
+    ],
+    "views_per_ring": 40,
+    "test_every": 5,
+    "camera_margin": 1.05
+  },
+  "sfm": {
+    "threads": 12,
+    "max_num_features": 4096,
+    "mask_erosion_pixels": 3,
+    "matching_max_ratio": 0.8,
+    "verification_max_error": 2
+  },
+  "training": {
+    "iterations": 30000,
+    "sh_degree": 3,
+    "white_background": true,
+    "random_background": false,
+    "densify_until_iter": 15000,
+    "save_iterations": [
+      7000,
+      30000
+    ],
+    "checkpoint_iterations": [
+      7000,
+      30000
+    ]
+  },
+  "evaluation": {
+    "iteration": 30000,
+    "orbit_frames": 72,
+    "orbit_elevation_degrees": 15,
+    "gif_duration_ms": 70
+  },
+  "slug": "can"
+}
+

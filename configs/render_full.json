@@ -1,0 +1,19 @@
+{
+  "input": "/data/260010047/3d_homework/outputs/material_candidates.jsonl",
+  "frames_dir": "/data/260010047/3d_homework/outputs/full_frames",
+  "manifest_dir": "/data/260010047/3d_homework/outputs/full_render",
+  "scratch_root": "/tmp/objaverse_hw1_full",
+  "workers": 6,
+  "gpu_render_slots": 4,
+  "resume": true,
+  "cpu_threads": 1,
+  "resolution": 256,
+  "samples": 32,
+  "denoising": true,
+  "texture_limit": "1024",
+  "min_faces": 500,
+  "max_faces": 1000000,
+  "max_file_bytes": 104857600,
+  "view_angles_degrees": [[0, 20], [90, 30], [180, 20], [270, 30]],
+  "progress_every": 25
+}

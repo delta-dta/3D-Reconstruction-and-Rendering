@@ -1,0 +1,18 @@
+{
+  "input": "/data/260010047/3d_homework/outputs/coarse_candidates.jsonl",
+  "output": "/data/260010047/3d_homework/outputs/material_candidates.jsonl",
+  "summary": "/data/260010047/3d_homework/outputs/material_summary.json",
+  "workers": 16,
+  "min_faces": 500,
+  "max_faces": 1000000,
+  "max_file_bytes": 104857600,
+  "max_unsuitable_material_fraction": 0.5,
+  "min_color_information_fraction": 0.1,
+  "min_color_distance": 0.2,
+  "min_opaque_alpha": 0.95,
+  "max_transmission": 0.1,
+  "min_reflective_metallic": 0.8,
+  "max_reflective_roughness": 0.2,
+  "min_reflective_glossiness": 0.8,
+  "min_reflective_specular": 0.5
+}

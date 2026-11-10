@@ -1,0 +1,91 @@
+{
+  "objects": [
+    {
+      "slug": "shell",
+      "name": "贝壳标本",
+      "uid": "e4d2903fd8c643669c2d3b3ab081e5e7",
+      "config": "configs/hw2_shell.json",
+      "output_dir": "outputs/hw2_shell"
+    },
+    {
+      "slug": "can",
+      "name": "食品罐头",
+      "uid": "056e0c896ce34f13b92dca2c39de44d0",
+      "config": "configs/hw2_can.json",
+      "output_dir": "outputs/hw2_can"
+    },
+    {
+      "slug": "shoe",
+      "name": "彩色跑鞋",
+      "uid": "40a95876e4164dfc885b6e8f0136dfe3",
+      "config": "configs/hw2_shoe.json",
+      "output_dir": "outputs/hw2_shoe"
+    },
+    {
+      "slug": "brain",
+      "name": "解剖教学模型",
+      "uid": "aa7e9bf472e3482eaa044ffa346fb175",
+      "config": "configs/hw2_brain.json",
+      "output_dir": "outputs/hw2_brain"
+    },
+    {
+      "slug": "stone",
+      "name": "石质渔具",
+      "uid": "0d3ccab55b724ca6a5c87881d16b4d58",
+      "config": "configs/hw2_stone.json",
+      "output_dir": "outputs/hw2_stone"
+    },
+    {
+      "slug": "candle",
+      "name": "彩绘蜡烛",
+      "uid": "d9f66a5fd13945429f1a1896c1102e9f",
+      "config": "configs/hw2_candle.json",
+      "output_dir": "outputs/hw2_candle"
+    },
+    {
+      "slug": "jug",
+      "name": "装饰陶壶",
+      "uid": "a904a1c301f84bbb8af232dd612d436d",
+      "config": "configs/hw2_jug.json",
+      "output_dir": "outputs/hw2_jug"
+    },
+    {
+      "slug": "owl",
+      "name": "猫头鹰摆件",
+      "uid": "040143111d264848949bee737058b83c",
+      "config": "configs/hw2_owl.json",
+      "output_dir": "outputs/hw2_owl"
+    },
+    {
+      "slug": "robot",
+      "name": "机器人模型",
+      "uid": "502ba288b5ff45acacf0e8ca85e57774",
+      "config": "configs/hw2_robot.json",
+      "output_dir": "outputs/hw2_robot"
+    },
+    {
+      "slug": "lamb",
+      "name": "羊形陶质摆件",
+      "uid": "97989d443ac048acb6bb42a2f82c6324",
+      "config": "configs/hw2_lamb.json",
+      "output_dir": "outputs/hw2_lamb"
+    }
+  ],
+  "representatives": [
+    "lamb",
+    "can",
+    "robot"
+  ],
+  "experiments": [
+    "views24",
+    "views48",
+    "gt_poses"
+  ],
+  "novel_elevations": [
+    0,
+    30,
+    60
+  ],
+  "novel_views_per_ring": 12
+}
+

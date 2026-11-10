@@ -1,0 +1,8 @@
+.tools/
+__pycache__/
+*.pyc
+.env
+ds_api_key
+outputs/
+cleaned/
+dist/

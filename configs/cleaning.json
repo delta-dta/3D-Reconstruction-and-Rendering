@@ -1,0 +1,12 @@
+{
+  "dataset_root": "/mnt/aoss/datasets/Objaversev1.0",
+  "shards": [
+    "000-000", "000-001", "000-002", "000-003", "000-004", "000-005",
+    "000-006", "000-007", "000-008", "000-009", "000-010"
+  ],
+  "min_faces": 500,
+  "max_faces": 1000000,
+  "max_file_bytes": 104857600,
+  "coarse_candidates": "/data/260010047/3d_homework/outputs/coarse_candidates.jsonl",
+  "coarse_summary": "/data/260010047/3d_homework/outputs/coarse_summary.json"
+}
