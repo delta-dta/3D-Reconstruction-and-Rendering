@@ -2,7 +2,8 @@
 set -e
 
 # 从仓库根目录运行，先激活 3dvision。
-export CUDA_HOME="$(dirname "$(dirname "$(command -v nvcc)")")"
+source configs/cuda.env
+export CUDA_HOME
 export PATH="$CUDA_HOME/bin:$PATH"
 export TORCH_CUDA_ARCH_LIST=12.0
 export MAX_JOBS=4

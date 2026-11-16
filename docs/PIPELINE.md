@@ -32,14 +32,15 @@ tar -xf .tools/blender-4.5.3-linux-x64.tar.xz -C .tools
 
 Blender需要系统图形库；Ubuntu可安装 `libice6`、`libsm6`、`libxrender1`、`libxi6`、`libxfixes3`、`libxkbcommon0`、`libgl1`。本机额外库的位置已写在路径配置中。报告PDF导出另需Pango与Noto CJK字体，见 `REPRODUCE.md`。
 
-获取固定版本的官方3DGS和三个计算子模块。CUDA12.9的 `nvcc` 需已加入 `PATH`，下列命令据此确定工具链位置：
+在 `configs/cuda.env` 中将 `CUDA_HOME` 设为CUDA12.9的安装目录；启动脚本与下列安装命令共用此配置。获取固定版本的官方3DGS和三个计算子模块：
 
 ```bash
 git clone https://github.com/graphdeco-inria/gaussian-splatting.git .tools/gaussian-splatting
 git -C .tools/gaussian-splatting checkout 54c035f7834b564019656c3e3fcc3646292f727d
 git -C .tools/gaussian-splatting submodule update --init --recursive -- submodules/diff-gaussian-rasterization submodules/simple-knn submodules/fused-ssim
 git -C .tools/gaussian-splatting/submodules/diff-gaussian-rasterization apply ../../../../patches/gaussian_rasterizer_cuda129.patch
-export CUDA_HOME="$(dirname "$(dirname "$(command -v nvcc)")")"
+source configs/cuda.env
+export CUDA_HOME
 export PATH="$CUDA_HOME/bin:$PATH"
 export TORCH_CUDA_ARCH_LIST=12.0
 export MAX_JOBS=4
