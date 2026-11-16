@@ -1,9 +1,9 @@
 {
   "uid": "a904a1c301f84bbb8af232dd612d436d",
   "name": "装饰陶壶",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/hw2_jug",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/hw2_jug",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,

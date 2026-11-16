@@ -8,7 +8,7 @@ Git克隆地址：`https://github.com/delta-dta/3D-Reconstruction-and-Rendering.
 ## 作业网站提交两项
 
 1. **报告附件**：[HOMEWORK2_REPORT.pdf](HOMEWORK2_REPORT.pdf)。报告包含完整流程、实际结果、影响因素实验、组号、成员分工和GitHub链接。[Markdown源文件](HOMEWORK2_REPORT.md)与PDF同源，随仓库保存。
-2. **GitHub仓库链接**：将上面的仓库地址填入网站的链接栏；若无独立链接栏，写入提交备注。报告封面与正文中也已列出该地址。
+2. **GitHub仓库链接**：将上面的仓库地址填入网站的链接栏；若无独立链接栏，写入提交备注。报告开头与正文中也已列出该地址。
 
 网站备注可直接填写：
 
@@ -19,7 +19,7 @@ GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 报告：HOMEWORK2_REPORT.pdf。代码、完整业务提示词、匹配结果与GIF见仓库。
 ```
 
-原始要求未限定报告格式；PDF用于直接阅读，Markdown提供可编辑源文件。GitHub仓库需要实际上传代码与结果后再提交网站链接。当前远程是否已有内容，以GitHub页面和远程main为准。
+原始要求未限定报告格式；PDF用于直接阅读，Markdown提供可编辑源文件。仓库使用main分支，包含下表中的代码、提示词、匹配结果和动画。网站提交PDF及仓库链接。
 
 ## 仓库内容与要求对应
 
@@ -27,6 +27,7 @@ GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 |---|---|
 | 流程文档、分析与发现 | `docs/HOMEWORK2_REPORT.md`、`.pdf`；`docs/EXPERIMENTS.md` |
 | 完整代码与配置 | `programs/`、`configs/`、`scripts/`、`patches/`、`environment.yml` |
+| 统一pipeline入口 | `programs/run_pipeline.py`、`configs/pipeline.json`、`docs/PIPELINE.md` |
 | 作业1清洗数据来源 | `results/assignment1/` 的清洗清单、10物体UID与源SHA |
 | 全部业务提示词 | `configs/preview_deepseek.json`、`docs/PROMPTS.md`；AI辅助范围在 `docs/AI_USAGE.md` |
 | 全部10物体匹配 | `results/hw2_*/sfm/`：4张匹配图、完整验证图像对CSV、关键点与内点NPZ |
@@ -44,11 +45,10 @@ GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 
 ## 仓库推送
 
-本地材料整理、生成PDF和压缩打包，与远程发布分别记录。使用有该仓库写入权限的Git身份推送：
+后续修改完成后，使用已经配置好的origin推送：
 
 ```bash
-git -c safe.directory=/data/260010047/3d_homework remote add origin https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git
 git -c safe.directory=/data/260010047/3d_homework push -u origin main
 ```
 
-第一条仅在尚无origin时执行；若已配置相同地址，直接推送。不要将API Key、`.tools/`、Conda环境或整个 `outputs/` 加入提交。
+不要将API Key、`.tools/`、Conda环境或整个 `outputs/` 加入提交。

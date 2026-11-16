@@ -1,9 +1,9 @@
 {
   "uid": "502ba288b5ff45acacf0e8ca85e57774",
   "name": "机器人模型",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/ablations/robot_gt_poses",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/ablations/robot_gt_poses",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,
@@ -50,7 +50,7 @@
     "directory": "evaluation"
   },
   "slug": "robot",
-  "source_output_dir": "/data/260010047/3d_homework/outputs/hw2_robot",
+  "source_output_dir": "outputs/hw2_robot",
   "experiment": {
     "kind": "gt_poses",
     "name": "gt_poses",

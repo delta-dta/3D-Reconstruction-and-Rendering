@@ -12,6 +12,18 @@
 
 完整下载仓库（Code → Download ZIP）或本机生成的 `dist/coursework_submission.zip` 后解压，用浏览器打开根目录 `index.html`，保持 `results/` 与 `docs/` 的相对位置。单独下载 HTML 不包含图片资源。GitHub 可直接阅读 Markdown、PDF 并打开各 GIF。
 
+## 运行pipeline
+
+激活 `3dvision` 并在 `configs/pipeline.json` 中设置数据与工具位置后，从仓库根目录运行：
+
+```bash
+python -B programs/run_pipeline.py --config configs/hw2_lamb.json
+```
+
+统一入口依次完成成像、图像准备、SIFT/SfM、3DGS训练、评价/GIF和结果页面，新运行保存在 `outputs/pipeline/`。环境安装、十物体批处理和各阶段输出见 [PIPELINE](docs/PIPELINE.md)。六个阶段共用原实验的代码与参数。
+
+只检查已提交材料可运行 `python -B programs/verify_repository.py`，不需要原始数据或GPU。
+
 ## 成员与分工
 
 | 成员 | 分工安排 | 预计工作量 |

@@ -1,5 +1,7 @@
 # 环境、执行顺序与复现
 
+作业2现在提供统一入口 `programs/run_pipeline.py`。从新克隆仓库开始运行时，先看[PIPELINE](PIPELINE.md)：在 `configs/pipeline.json` 设置数据与工具位置，再执行六阶段完整流程。下面保留正式实验的环境、命令记录及对照实验说明。
+
 ## 当前机器
 
 项目根目录：`/data/260010047/3d_homework`。源数据：`/mnt/aoss/datasets/Objaversev1.0/`。GPU：RTX 5090，32 GB。Conda 环境：`/data/260010047/miniconda3/envs/3dvision`。
@@ -80,7 +82,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 4. 准备 Blender 4.5.3 Linux 版本至 `.tools/blender-4.5.3-linux-x64/`。本机额外的 libICE/libSM 位于 `.tools/system-libs/usr/lib/x86_64-linux-gnu/`，渲染启动命令为 Blender 单独设置 `LD_LIBRARY_PATH`。
 5. 使源 Objaverse 文件位于配置指定路径。可先依照 `results/assignment1/cleaned_uids.txt` 准备所需对象，再复现单物体。
 
-该项目的启动命令针对本机写明了绝对路径。更换根目录、Conda 位置或数据挂载位置时，修改相应 JSON 和 Bash 路径。预编译工具、源 GLB、完整中间图像和模型检查点保存在本机，提交包包含代码、配置与可查看结果。
+历史启动脚本保留了本机执行时的绝对路径；新统一入口根据仓库位置解析路径，只需在 `configs/pipeline.json` 设置数据与工具位置。物体和对照配置中的项目路径已改为相对路径，从仓库根目录使用。预编译工具、源GLB、完整中间图像和模型检查点保存在本机，提交包包含代码、配置与可查看结果。
 
 ## 结果保存在哪里
 

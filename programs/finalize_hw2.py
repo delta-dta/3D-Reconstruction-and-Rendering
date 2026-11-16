@@ -91,6 +91,7 @@ def main():
         '<h2>输入数据</h2><img src="dataset_overview.jpg" alt="三个高度的输入图像">',
         '<p><a href="data/metadata.json">真实相机参数与归一化</a> · <a href="data/splits.json">固定训练测试划分</a></p>',
         '<h2>实际匹配结果</h2>',
+        '<p><a href="sfm/geometric_matches.npz">全部关键点与验证内点</a> · <a href="sfm/verified_pairs.csv">完整图像对列表</a> · <a href="sfm/image_ids.json">图像ID</a></p>',
     ]
     for row in sfm['matches']:
         page.append(f'<div class="pair"><p>{escape(row["first"])} ↔ {escape(row["second"])}：{row["verified_matches"]} 个几何验证内点</p><img src="sfm/{escape(row["image"])}" alt="特征匹配"></div>')

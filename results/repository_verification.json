@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "objects": 10,
+  "gifs": 10,
+  "matching_visualizations": 40,
+  "verified_pairs": 20210,
+  "geometric_inliers": 2264799,
+  "scope": "Committed code, configs, prompts, report and all ten result directories; no local training data required"
+}

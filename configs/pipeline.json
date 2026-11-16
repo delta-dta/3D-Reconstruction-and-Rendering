@@ -1,0 +1,8 @@
+{
+  "dataset_root": "/mnt/aoss/datasets/Objaversev1.0",
+  "cleaned_manifest": "results/assignment1/hw2_candidates.jsonl",
+  "output_root": "outputs/pipeline",
+  "blender": ".tools/blender-4.5.3-linux-x64/blender",
+  "blender_library_path": ".tools/system-libs/usr/lib/x86_64-linux-gnu",
+  "gaussian_repo": ".tools/gaussian-splatting"
+}

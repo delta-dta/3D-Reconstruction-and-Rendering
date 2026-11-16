@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import sqlite3
+from export_matching import export_matching
 import time
 
 import numpy as np
@@ -150,6 +151,7 @@ def main():
         'alignment': 'Seven-degree-of-freedom similarity fit using training camera centers only',
     }
     (sfm / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    export_matching(database_path, sfm)
     print(json.dumps(summary), flush=True)
 
 

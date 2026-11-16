@@ -1,9 +1,9 @@
 {
   "uid": "aa7e9bf472e3482eaa044ffa346fb175",
   "name": "解剖教学模型",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/hw2_brain",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/hw2_brain",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,

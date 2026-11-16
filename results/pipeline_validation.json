@@ -1,0 +1,26 @@
+{
+  "complete": true,
+  "object": "lamb",
+  "config": "configs/hw2_lamb.json",
+  "entrypoint": "programs/run_pipeline.py",
+  "stages": [
+    "render",
+    "prepare",
+    "sfm",
+    "train",
+    "evaluate",
+    "finalize"
+  ],
+  "train_views": 96,
+  "test_views": 24,
+  "registered_cameras": 96,
+  "iteration": 30000,
+  "gaussians": 60046,
+  "gif_frames": 72,
+  "mean_foreground_psnr": 38.28094530105591,
+  "mean_psnr": 44.11151043574015,
+  "mean_ssim": 0.9955904061595598,
+  "mean_reprojection_error_px": 0.3209286655685473,
+  "local_output": "outputs/pipeline/lamb",
+  "scope": "Fresh end-to-end validation of the unified entrypoint; original ten-object metrics are unchanged."
+}

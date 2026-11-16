@@ -2,13 +2,12 @@
 
 import csv
 import gzip
-import io
 from html import escape
 import json
 import os
 from pathlib import Path
 import shutil
-import sqlite3
+from export_matching import export_matching
 
 os.environ['MPLCONFIGDIR'] = '/tmp/3dvision-matplotlib'
 import matplotlib
@@ -88,23 +87,6 @@ def collect(course):
                              'foreground_psnr': evaluation['mean_foreground_psnr'],
                              'gaussians': training['gaussians'], 'training_seconds': training['elapsed_seconds']})
     return objects, controls
-
-
-def export_matching(database_path, output):
-    arrays, pairs = {}, []
-    with sqlite3.connect(database_path) as database:
-        names = dict(database.execute('SELECT image_id,name FROM images'))
-        for image_id, rows, cols, payload in database.execute('SELECT image_id,rows,cols,data FROM keypoints'):
-            arrays[f'keypoints_{image_id}'] = np.frombuffer(payload, np.float32).reshape(rows, cols).copy()
-        for pair_id, rows, payload in database.execute('SELECT pair_id,rows,data FROM two_view_geometries WHERE rows>0'):
-            low, high = divmod(pair_id, 2147483647)
-            arrays[f'inliers_{pair_id}'] = np.frombuffer(payload, np.uint32).reshape(rows, 2).copy()
-            pairs.append({'pair_id': pair_id, 'first': names[low], 'second': names[high], 'inliers': rows})
-    buffer = io.BytesIO()
-    np.savez_compressed(buffer, **arrays)
-    (output / 'geometric_matches.npz').write_bytes(buffer.getvalue())
-    write_csv(output / 'verified_pairs.csv', pairs)
-    write_json(output / 'image_ids.json', names)
 
 
 def compact_results(objects, controls):
@@ -590,6 +572,18 @@ def readme(rows, averages):
 
 完整下载仓库（Code → Download ZIP）或本机生成的 `dist/coursework_submission.zip` 后解压，用浏览器打开根目录 `index.html`，保持 `results/` 与 `docs/` 的相对位置。单独下载 HTML 不包含图片资源。GitHub 可直接阅读 Markdown、PDF 并打开各 GIF。
 
+## 运行pipeline
+
+激活 `3dvision` 并在 `configs/pipeline.json` 中设置数据与工具位置后，从仓库根目录运行：
+
+```bash
+python -B programs/run_pipeline.py --config configs/hw2_lamb.json
+```
+
+统一入口依次完成成像、图像准备、SIFT/SfM、3DGS训练、评价/GIF和结果页面，新运行保存在 `outputs/pipeline/`。环境安装、十物体批处理和各阶段输出见 [PIPELINE](docs/PIPELINE.md)。六个阶段共用原实验的代码与参数。
+
+只检查已提交材料可运行 `python -B programs/verify_repository.py`，不需要原始数据或GPU。
+
 ## 成员与分工
 
 {members}
@@ -701,7 +695,8 @@ def write_progress():
 | 报告与学习资料 | 完成 | docs/ 和总览页面 |
 | 提交信息 | 已配置 | 第一组、成员1至4、等量分工、GitHub 地址 |
 | 正式提交报告 | 已完成 | Markdown、PDF；校验见 results/submission_verification.json |
-| GitHub 上传 | 尚未推送 | 目标仓库见 configs/submission.json |
+| 统一pipeline | 已验证 | 羊摆件六阶段重跑；results/pipeline_validation.json |
+| GitHub仓库 | main分支 | https://github.com/delta-dta/3D-Reconstruction-and-Rendering |
 ''')
 
 

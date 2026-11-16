@@ -1,9 +1,9 @@
 {
   "uid": "5bda8ef98bfb4a908bd671b248ee22ba",
   "name": "编织器物",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/hw2_basket",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/hw2_basket",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,

@@ -1,9 +1,9 @@
 {
   "uid": "0d3ccab55b724ca6a5c87881d16b4d58",
   "name": "石质渔具",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/hw2_stone",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/hw2_stone",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,

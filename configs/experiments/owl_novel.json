@@ -1,9 +1,9 @@
 {
   "uid": "040143111d264848949bee737058b83c",
   "name": "猫头鹰摆件",
-  "cleaned_manifest": "/data/260010047/3d_homework/cleaned/cleaned_models.jsonl",
-  "output_dir": "/data/260010047/3d_homework/outputs/novel_views/owl",
-  "gaussian_repo": "/data/260010047/3d_homework/.tools/gaussian-splatting",
+  "cleaned_manifest": "results/assignment1/cleaned_models.jsonl",
+  "output_dir": "outputs/novel_views/owl",
+  "gaussian_repo": ".tools/gaussian-splatting",
   "seed": 20261106,
   "render": {
     "resolution": 512,
@@ -51,6 +51,6 @@
     "directory": "evaluation"
   },
   "slug": "owl",
-  "model_dir": "/data/260010047/3d_homework/outputs/hw2_owl/model"
+  "model_dir": "outputs/hw2_owl/model"
 }
 

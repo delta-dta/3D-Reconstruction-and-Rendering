@@ -11,4 +11,5 @@
 | 报告与学习资料 | 完成 | docs/ 和总览页面 |
 | 提交信息 | 已配置 | 第一组、成员1至4、等量分工、GitHub 地址 |
 | 正式提交报告 | 已完成 | Markdown、PDF；校验见 results/submission_verification.json |
-| GitHub 上传 | 尚未推送 | 目标仓库见 configs/submission.json |
+| 统一pipeline | 已验证 | 羊摆件六阶段重跑；results/pipeline_validation.json |
+| GitHub仓库 | main分支 | https://github.com/delta-dta/3D-Reconstruction-and-Rendering |

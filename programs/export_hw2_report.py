@@ -45,9 +45,8 @@ def main():
                     f"{row['psnr']:.3f}", f"{row['ssim']:.5f}"]) + ' |')
         assert expected in text, row['object']
         assert row['uid'] in text
-    assert json.loads((ROOT / 'configs/preview_deepseek.json').read_text())['prompt'] in text
-    body = markdown.markdown(text, extensions=['tables', 'fenced_code', 'toc', 'attr_list', 'md_in_html'],
-                             extension_configs={'toc': {'toc_depth': '2-2'}})
+    assert json.loads((ROOT / 'configs/preview_deepseek.json').read_text())['prompt'] in (ROOT / 'docs/PROMPTS.md').read_text()
+    body = markdown.markdown(text, extensions=['tables', 'fenced_code', 'md_in_html'])
     references = References()
     references.feed(body)
     for target in references.images + references.links:
@@ -73,6 +72,9 @@ def main():
             f'<base href="{source.parent.as_uri()}/"><body>{body}</body></html>')
     preview = ROOT / config['preview_dir']
     preview.mkdir(parents=True, exist_ok=True)
+    for pattern in ['page_*.png', 'preview_*.jpg']:
+        for cached in preview.glob(pattern):
+            cached.unlink()
     (preview / 'report.html').write_text(html)
     HTML(string=html, base_url=str(source.parent)).write_pdf(destination, stylesheets=[CSS(filename=str(ROOT / config['stylesheet']))])
     document = pymupdf.open(destination)
@@ -85,6 +87,7 @@ def main():
     assert all(not item.startswith('file:') for item in links)
     assert '\ufffd' not in extracted
     assert '.page-start' not in extracted
+    assert '## 参考文献' not in text and '[TOC]' not in text and 'class="cover"' not in text
     for index, page in enumerate(document):
         page.get_pixmap(matrix=pymupdf.Matrix(0.9, 0.9), alpha=False).save(preview / f'page_{index + 1:02d}.png')
     for start in range(0, len(document), 6):
@@ -99,7 +102,8 @@ def main():
         sheet.save(preview / f'preview_{start // 6 + 1:02d}.jpg', quality=90)
     report = {'complete': True, 'source': config['markdown'], 'pdf': config['pdf'], 'pages': len(document),
               'pdf_bytes': destination.stat().st_size, 'baseline_rows_verified': len(metrics),
-              'prompt_matches_actual_config': True, 'image_references': len(references.images),
+              'prompt_matches_actual_config': True, 'prompt_document': 'docs/PROMPTS.md',
+              'image_references': len(references.images),
               'local_references_checked': sum(not urlsplit(target).scheme and bool(urlsplit(target).path)
                                               for target in references.images + references.links),
               'clickable_pdf_links': len(links), 'github_url': repository, 'members': [row['name'] for row in submission['members']],

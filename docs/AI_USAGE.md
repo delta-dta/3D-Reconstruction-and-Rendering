@@ -29,3 +29,5 @@
 > 现在请你按照作业2的要求，帮我整理最后要提交的内容，报告先用markdown文件写，最后再转成pdf文件。组号为第一组，成员姓名请你命名为成员1,2,3,4，然后尽可能给四个成员分配相同的任务量。
 
 目标仓库为 `https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git`。正式Markdown报告及同源PDF为 `docs/HOMEWORK2_REPORT.md`、`docs/HOMEWORK2_REPORT.pdf`。
+
+后续按用户要求整理统一pipeline入口，执行一次完整流程验证并准备推送到该仓库。报告改为直接进入正文，去除封面、目录和参考文献章节；资产署名、代码来源和提示词记录继续随仓库提供。
