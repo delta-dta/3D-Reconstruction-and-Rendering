@@ -7,6 +7,6 @@
   "novel_test_views": 360,
   "verified_pairs_exported": 20210,
   "geometric_inliers_exported": 2264799,
-  "local_html_links_checked": 547,
+  "local_html_links_checked": 550,
   "data_separation": "96/24 disjoint; subset tests identical; new elevations excluded from training"
 }

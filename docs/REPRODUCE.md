@@ -95,3 +95,19 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 | `docs/` | 课程报告、学习指南、实验与复现说明 |
 
 必要条件都已写入配置。优先复制一个已有配置开展下一次实验，保持测试划分固定，再对照新的指标与误差图。
+
+## 正式报告的 Markdown 与 PDF
+
+第一组的正式报告为 `docs/HOMEWORK2_REPORT.md`，导出文件为 `docs/HOMEWORK2_REPORT.pdf`。成员1～成员4的均衡分工和目标仓库记录在 `configs/submission.json`；成员为代称，分工在提交前核对实际贡献。
+
+PDF导出使用WeasyPrint 66.0，依赖系统Pango、Harfbuzz、Fontconfig和Noto CJK字体。新Ubuntu环境按官方安装说明准备 `libpango-1.0-0`、`libpangoft2-1.0-0`、`libharfbuzz0b`、`libharfbuzz-subset0` 和 `fonts-noto-cjk`，Python依赖在 `environment.yml` 与 `configs/report_requirements.txt` 中。
+
+```bash
+conda activate 3dvision
+python -B programs/prepare_submission.py
+python -B programs/export_hw2_report.py
+```
+
+第一条命令只同步组员、仓库、课程概览与结果首页，不重跑训练或改动实验指标。第二条从Markdown转换PDF，将图像嵌入文件，并将PDF内的相对文件链接转换成目标GitHub仓库中的路径。导出时核对十物体主表、UID、实际筛选提示词与中文文字提取；摘要在 `results/submission_verification.json`，逐页预览在 `outputs/report_export/`。
+
+7,000步恢复状态 `chkpnt7000.pth` 和第三方构建缓存已按要求清理；7k/30k高斯PLY、最终恢复状态与训练数据仍保留。阶段评价只读取PLY，不依赖已删除的7k恢复状态。需要重新编译时按 `setup_hw2_tools.sh` 中的安装命令执行。

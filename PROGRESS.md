@@ -9,4 +9,6 @@
 | 训练时长 | 完成 | 10 个物体，7k/30k |
 | 新高度 | 完成 | 10 个物体、360 张测试图 |
 | 报告与学习资料 | 完成 | docs/ 和总览页面 |
-| 提交信息 | 待填写 | 组号、成员贡献、GitHub 地址 |
+| 提交信息 | 已配置 | 第一组、成员1至4、等量分工、GitHub 地址 |
+| 正式提交报告 | 已完成 | Markdown、PDF；校验见 results/submission_verification.json |
+| GitHub 上传 | 尚未推送 | 目标仓库见 configs/submission.json |

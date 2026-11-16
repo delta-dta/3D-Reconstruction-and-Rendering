@@ -1,6 +1,6 @@
 # 作业 1：面向图像重建的 Objaverse 数据清洗
 
-组号、成员与分工：待填写。源码和实际配置分别在 `programs/`、`configs/`，本报告描述本次已执行结果。
+组号：第一组。成员代称：成员1、成员2、成员3、成员4；均衡分工安排见[正式报告](HOMEWORK2_REPORT.md)第1节与 `configs/submission.json`。源码和实际配置分别在 `programs/`、`configs/`，本报告描述本次已执行结果。
 
 ## 目标与范围
 

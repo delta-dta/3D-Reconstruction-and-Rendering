@@ -1,37 +1,54 @@
-# 提交说明
+# 第一组：作业2提交说明
 
-实验和材料由项目代码生成；组号、成员姓名及实际分工、目标 GitHub 地址目前尚未确定，集中填写在 `configs/submission.json`。成员条目格式为 `{"name":"姓名","contribution":"实际贡献"}`。填写后重新生成课程报告。
+组号：**第一组**。成员代称：**成员1、成员2、成员3、成员4**。四人按相近工作量分配，各预计25%，具体任务见正式报告第1节及 `configs/submission.json`；提交前核对实际贡献。
 
-## 对应作业要求
+GitHub仓库：**https://github.com/delta-dta/3D-Reconstruction-and-Rendering**  
+Git克隆地址：`https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git`
 
-| 要求 | 项目中的内容 |
+## 作业网站提交两项
+
+1. **报告附件**：[HOMEWORK2_REPORT.pdf](HOMEWORK2_REPORT.pdf)。报告包含完整流程、实际结果、影响因素实验、组号、成员分工和GitHub链接。[Markdown源文件](HOMEWORK2_REPORT.md)与PDF同源，随仓库保存。
+2. **GitHub仓库链接**：将上面的仓库地址填入网站的链接栏；若无独立链接栏，写入提交备注。报告封面与正文中也已列出该地址。
+
+网站备注可直接填写：
+
+```text
+第一组：成员1、成员2、成员3、成员4。
+作业2采用SIFT/COLMAP + 3D Gaussian Splatting，完成10物体重建、匹配结果与10个GIF。
+GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
+报告：HOMEWORK2_REPORT.pdf。代码、完整业务提示词、匹配结果与GIF见仓库。
+```
+
+原始要求未限定报告格式；PDF用于直接阅读，Markdown提供可编辑源文件。GitHub仓库需要实际上传代码与结果后再提交网站链接。当前远程是否已有内容，以GitHub页面和远程main为准。
+
+## 仓库内容与要求对应
+
+| 要求 | 文件位置 |
 |---|---|
-| 使用作业 1 清洗数据 | 完整清洗清单、10 物体 UID 与源 SHA，`results/assignment1/` |
-| 完整图像 → 重建 → NeRF 或 3DGS 流程 | `programs/`、`configs/`、`scripts/` 与 `docs/COURSE_REPORT.md` |
-| 10 个不同物体 | `configs/hw2_course.json` 与十个结果目录 |
-| 每物体一张 GIF | `results/hw2_*/reconstruction.gif` |
-| 全部物体的匹配结果 | 每个 `sfm/` 下匹配图、全部验证图像对 CSV、关键点与全部内点 NPZ |
-| 流程影响分析 | `docs/EXPERIMENTS.md`，图像数、位姿、时长、新高度测试 |
-| 全部提示词 | `configs/preview_deepseek.json`、`docs/PROMPTS.md`、`docs/AI_USAGE.md` |
-| 环境与复现 | `environment.yml`、固定源代码提交、CUDA 补丁和复现说明 |
-| 组号、成员、贡献 | `configs/submission.json`，由本人填写 |
-| GitHub 链接 | 目标仓库确定后填入配置与报告 |
+| 流程文档、分析与发现 | `docs/HOMEWORK2_REPORT.md`、`.pdf`；`docs/EXPERIMENTS.md` |
+| 完整代码与配置 | `programs/`、`configs/`、`scripts/`、`patches/`、`environment.yml` |
+| 作业1清洗数据来源 | `results/assignment1/` 的清洗清单、10物体UID与源SHA |
+| 全部业务提示词 | `configs/preview_deepseek.json`、`docs/PROMPTS.md`；AI辅助范围在 `docs/AI_USAGE.md` |
+| 全部10物体匹配 | `results/hw2_*/sfm/`：4张匹配图、完整验证图像对CSV、关键点与内点NPZ |
+| 每物体GIF | `results/hw2_*/reconstruction.gif`，共10个，各72帧 |
+| 对照结果 | `results/ablations/`、`experiments.csv`、`iterations.csv`、`novel_views.csv` |
+| 成员与贡献安排 | 报告第1节、`configs/submission.json` |
+| 环境与复现 | `docs/REPRODUCE.md`、`environment.yml`、固定官方代码版本 |
+| 可浏览展示 | 根目录 `index.html` 与每物体结果页 |
 
-## 本地与仓库内容
+## 下载包与离线阅读
 
-本机完整 `outputs/` 与 `cleaned/` 用于学习和继续优化。仓库提交 `results/` 的精简成果、源码、配置与文档；中间缓存、Conda、编译工具、API Key 和大型训练检查点通过 `.gitignore` 排除。
+`dist/coursework_submission.zip` 是本地已提交Git内容的完整快照，包含报告、源码、配置与精简结果，可作为补充附件或备份。下载后完整解压，再用浏览器打开根目录 `index.html`。需要保留 `results/`、`docs/` 与首页的相对位置，单独下载HTML不包含图片。PDF的图像已嵌入，可单独下载阅读；PDF文件链接指向GitHub。
 
-课程压缩包 `dist/coursework_submission.zip` 由本地 Git 中已提交内容生成，可离线解压查看根目录 `index.html`。Markdown 报告在 GitHub 中直接阅读；网页也可在本地浏览器打开。
+完整训练数据、数据库、PLY与最终检查点保留在本机 `outputs/`，用于学习和优化。工具、Conda、API Key、大型检查点和中间缓存不进入Git或提交包。资产署名和第三方来源见 `ASSET_CREDITS.md`、`THIRD_PARTY.md`。
 
-## 上传目标仓库
+## 仓库推送
 
-待目标仓库创建并授权后，在项目目录设置远程地址并推送。下面的仓库地址需要替换成自己的实际地址：
+本地材料整理、生成PDF和压缩打包，与远程发布分别记录。使用有该仓库写入权限的Git身份推送：
 
 ```bash
-git -c safe.directory=/data/260010047/3d_homework remote add origin https://github.com/你的账号/你的仓库.git
+git -c safe.directory=/data/260010047/3d_homework remote add origin https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git
 git -c safe.directory=/data/260010047/3d_homework push -u origin main
 ```
 
-命令中的 `safe.directory` 用于当前容器与共享目录的所有者差异，不修改全局 Git 配置。更换目录时对应修改。
-
-不要把 `ds_api_key`、`.env`、`.tools/`、Conda 环境或整个 `outputs/` 加入提交。资产署名和第三方代码来源见 `ASSET_CREDITS.md`、`THIRD_PARTY.md`。
+第一条仅在尚无origin时执行；若已配置相同地址，直接推送。不要将API Key、`.tools/`、Conda环境或整个 `outputs/` 加入提交。

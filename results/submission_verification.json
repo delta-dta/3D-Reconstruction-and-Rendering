@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "source": "docs/HOMEWORK2_REPORT.md",
+  "pdf": "docs/HOMEWORK2_REPORT.pdf",
+  "pages": 15,
+  "pdf_bytes": 2908215,
+  "baseline_rows_verified": 10,
+  "prompt_matches_actual_config": true,
+  "image_references": 15,
+  "local_references_checked": 42,
+  "clickable_pdf_links": 35,
+  "github_url": "https://github.com/delta-dta/3D-Reconstruction-and-Rendering",
+  "members": [
+    "成员1",
+    "成员2",
+    "成员3",
+    "成员4"
+  ],
+  "source_sha256": "c4600b62b6e3df8b67f02672a8275934ff76654447c4c761a6d77427a9773de8",
+  "pdf_sha256": "79154962b20609a320f2ddabca486995de9307c076db4d71fe8910b0bbab8450"
+}

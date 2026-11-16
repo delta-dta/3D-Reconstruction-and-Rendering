@@ -1,0 +1,44 @@
+@page {
+  size: A4;
+  margin: 19mm 17mm 19mm;
+  @top-left { content: "第一组 · 作业2：三维重建与渲染"; font-size: 8pt; color: #60717b; }
+  @bottom-center { content: counter(page) " / " counter(pages); font-size: 8pt; color: #60717b; }
+}
+@page:first { @top-left { content: none; } @bottom-center { content: none; } }
+html { font-family: "Noto Sans CJK SC", "DejaVu Sans", sans-serif; font-size: 10pt; color: #25323b; }
+body { margin: 0; line-height: 1.65; }
+h1, h2, h3 { color: #174e68; line-height: 1.4; break-after: avoid; }
+h1 { font-size: 25pt; margin-bottom: 10mm; }
+h2 { font-size: 15pt; border-bottom: 0.5pt solid #b8cbd4; padding-bottom: 2mm; margin-top: 7mm; }
+h3 { font-size: 11.5pt; margin-top: 5mm; }
+p { margin: 2.5mm 0; orphans: 3; widows: 3; }
+a { color: #155d83; text-decoration: none; overflow-wrap: break-word; }
+strong { color: #173e52; }
+table { width: 100%; border-collapse: collapse; margin: 4mm 0; font-size: 8.4pt; line-height: 1.45; break-inside: avoid; }
+thead { display: table-header-group; }
+th { background: #e9f1f5; font-weight: bold; color: #163f54; }
+td, th { border: 0.5pt solid #c7d3da; padding: 1.8mm 1.5mm; vertical-align: top; }
+tr { break-inside: avoid; }
+img { max-width: 100%; max-height: 85mm; height: auto; object-fit: contain; }
+p:has(> img) { text-align: center; break-inside: avoid; }
+figure { margin: 4mm 0; break-inside: avoid; }
+figcaption { font-size: 8.5pt; color: #5d6e78; line-height: 1.5; }
+code, pre { font-family: "DejaVu Sans Mono", "Noto Sans Mono CJK SC", monospace; font-size: 8pt; }
+code { overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f2f5f7; border: 0.5pt solid #dbe3e7; padding: 3mm; line-height: 1.5; }
+blockquote { margin: 3mm 0; border-left: 2pt solid #83a8ba; padding-left: 3mm; color: #4d606b; }
+ul, ol { padding-left: 6mm; }
+.cover { padding-top: 28mm; text-align: center; break-after: page; }
+.cover h1 { font-size: 28pt; border: 0; margin-bottom: 8mm; }
+.cover p { margin: 7mm 0; }
+.cover .subtitle { font-size: 15pt; color: #506a78; }
+.cover .summary { margin-top: 18mm; padding: 8mm; background: #e9f1f5; font-size: 12pt; }
+.toc { font-size: 9.5pt; break-after: page; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { margin: 2.5mm 0; }
+.toc a::after { content: leader(".") target-counter(attr(href), page); }
+.page-start { break-before: page; }
+.gallery { font-size: 9pt; break-inside: auto; }
+.gallery td { width: 50%; padding: 3mm; }
+.gallery img { width: 100%; max-height: 52mm; }
+.caption { font-size: 8.5pt; color: #5d6e78; }

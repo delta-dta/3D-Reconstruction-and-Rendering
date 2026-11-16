@@ -429,8 +429,10 @@ def object_pages(objects):
 
 
 def dashboard(objects, rows, findings):
+    submission = read(ROOT / 'configs/submission.json')
     parts = [head('三维视觉课程作业：清洗、重建与实验'), '<h1>从 Objaverse 清洗到三维高斯重建</h1>',
              '<p>作业 1 的 55,000 个资产清洗，以及作业 2 的 10 个物体重建、匹配、环绕动画与流程对照实验。</p>',
+             '<nav><a href="docs/HOMEWORK2_REPORT.pdf">正式报告 PDF</a><a href="docs/HOMEWORK2_REPORT.md">正式报告 Markdown</a></nav>',
              '<nav><a href="docs/COURSE_REPORT.md">课程报告</a><a href="docs/ASSIGNMENT1.md">作业 1 报告</a><a href="docs/EXPERIMENTS.md">对照实验</a><a href="docs/MATCHING_CASE.md">匹配歧义案例</a><a href="docs/LEARNING_GUIDE.md">学习指南</a><a href="docs/REPRODUCE.md">复现</a><a href="docs/PROMPTS.md">提示词</a><a href="docs/ASSET_CREDITS.md">资产署名</a></nav>',
              '<div class="stats"><div><b>7,819</b><br>清洗后资产</div><div><b>10 / 10</b><br>完整重建与 GIF</div><div><b>960 / 960</b><br>训练相机注册</div><div><b>9</b><br>额外对照训练</div><div><b>360</b><br>新高度测试图</div></div>',
              '<h2>10 个物体的重建结果</h2><p>每个物体使用独立模型。点击进入，可查看全部匹配、测试图像对照及交互式 SfM 点云。</p><div class="grid">']
@@ -448,7 +450,7 @@ def dashboard(objects, rows, findings):
                   '<img loading="lazy" src="results/figures/novel_elevations.png" alt="新高度评估"><img loading="lazy" src="results/figures/training_loss.png" alt="训练损失曲线">',
                   '<h2>作业 1 结果</h2><p>55,000 → 44,597 → 31,614 → 31,607 → 17,150 → 7,819。原始 GLB 保持原路径，输出清单与 SHA。</p>',
                   '<nav><a href="results/assignment1/cleaned_models.csv">清洗 CSV</a><a href="results/assignment1/cleaned_uids.txt">UID 清单</a><a href="results/assignment1/summary.json">清洗统计</a></nav>',
-                  '<p>组号、成员分工和 GitHub 地址尚未确定，填写 configs/submission.json 后可重新生成报告。正式提交项见 docs/SUBMISSION.md。</p>',
+                  f'<p>{escape(submission["group_number"])} · {"、".join(escape(row["name"]) for row in submission["members"])} · <a href="{escape(submission["github_url"].removesuffix(".git"))}">GitHub 仓库</a>。成员分工与网站提交方法见 <a href="docs/SUBMISSION.md">提交说明</a>。</p>',
                   '''<script>document.querySelectorAll('button[data-mode]').forEach(button=>button.onclick=()=>{document.querySelectorAll('button[data-mode]').forEach(b=>b.classList.toggle('active',b===button));document.getElementById('metric-title').textContent=button.dataset.mode==='fg'?'前景 PSNR':'全图 PSNR';document.querySelectorAll('td.psnr').forEach(cell=>cell.textContent=cell.dataset[button.dataset.mode]);});</script></body></html>'''])
     (ROOT / 'index.html').write_text('\n'.join(parts) + '\n')
 
@@ -468,6 +470,10 @@ def course_report(objects, rows, findings):
 GitHub：{submission['github_url']}
 
 {members}
+
+{submission['contribution_note']}
+
+正式提交报告：[Markdown](HOMEWORK2_REPORT.md) · [PDF](HOMEWORK2_REPORT.pdf)。本文保留课程全过程概览。
 
 ## 项目结果
 
@@ -513,7 +519,7 @@ flowchart LR
 
 **坐标对齐。** 只用训练相机中心拟合 Sim(3)，同时变换恢复的点与相机，消除 SfM 的全局尺度、旋转和平移自由度。测试相机不参与对齐。真实外参未用于 SfM 初始化；初始点来自图像三角化。
 
-**3DGS。** 使用官方实现，稀疏点初始化高斯，优化中心、旋转、尺度、不透明度和三阶球谐颜色。白色背景，损失 `0.8 L1 + 0.2 (1−SSIM)`；增密至 15,000 步，优化至 30,000 步；保存 7k/30k 模型和可继续训练的检查点。每个物体独立优化。
+**3DGS。** 使用官方实现，稀疏点初始化高斯，优化中心、旋转、尺度、不透明度和三阶球谐颜色。白色背景，损失 `0.8 L1 + 0.2 (1−SSIM)`；增密至 15,000 步，优化至 30,000 步；以保存的 7k/30k 高斯 PLY 比较阶段效果，保留最终恢复状态供后续训练。每个物体独立优化。
 
 **评价。** 在留出相机上渲染，与 RGB 真值比较。逐视角计算全图 PSNR、SSIM、前景 PSNR（真实 alpha>0.5），再取算术平均。10 物体总均值对每个物体等权。GIF 在 15°高度环绕 72 帧，由高斯模型渲染；指标由浮点渲染结果计算，不使用 GIF 调色板图像计算。
 
@@ -564,18 +570,31 @@ def prompt_document():
 
 
 def readme(rows, averages):
+    submission = read(ROOT / 'configs/submission.json')
+    members = markdown_table(['成员', '分工安排', '预计工作量'],
+        [[row['name'], row['contribution'], str(row['workload_percent']) + '%'] for row in submission['members']])
     table = markdown_table(['物体','前景 PSNR','全图 PSNR','SSIM','结果'],
         [[row['name'], f"{row['foreground_psnr']:.3f}", f"{row['psnr']:.3f}", f"{row['ssim']:.5f}",
           f"[GIF](results/hw2_{row['object']}/reconstruction.gif) · [详细结果](results/hw2_{row['object']}/index.html)"] for row in rows])
     text = f'''# 三维视觉课程项目：Objaverse 清洗、SfM 与 3DGS
 
-已完成作业 1 的 **55,000 → 7,819** 资产清洗，以及作业 2 的 **10 个物体完整重建、10 个 GIF、全部匹配结果和流程对照实验**。组号、成员贡献与 GitHub 地址在 `configs/submission.json` 中待填写。
+已完成作业 1 的 **55,000 → 7,819** 资产清洗，以及作业 2 的 **10 个物体完整重建、10 个 GIF、全部匹配结果和流程对照实验**。
+
+**{submission['group_number']}** · GitHub：[{submission['github_url'].removesuffix('.git')}]({submission['github_url'].removesuffix('.git')})
+
+**正式提交报告：[PDF](docs/HOMEWORK2_REPORT.pdf) · [Markdown 源文件](docs/HOMEWORK2_REPORT.md)**
 
 [结果总览](index.html) · [课程报告](docs/COURSE_REPORT.md) · [作业 1](docs/ASSIGNMENT1.md) · [对照实验](docs/EXPERIMENTS.md) · [学习指南](docs/LEARNING_GUIDE.md) · [复现](docs/REPRODUCE.md) · [提示词](docs/PROMPTS.md) · [提交说明](docs/SUBMISSION.md)
 
 另有一个[重复纹理造成位姿歧义的实际案例](docs/MATCHING_CASE.md)，用于理解“特征多”和“对应可靠”的区别。
 
-在本地浏览器打开 `index.html` 可查看动画和交互式点云；GitHub 可直接阅读 Markdown 并打开各 GIF。
+完整下载仓库（Code → Download ZIP）或本机生成的 `dist/coursework_submission.zip` 后解压，用浏览器打开根目录 `index.html`，保持 `results/` 与 `docs/` 的相对位置。单独下载 HTML 不包含图片资源。GitHub 可直接阅读 Markdown、PDF 并打开各 GIF。
+
+## 成员与分工
+
+{members}
+
+{submission['contribution_note']} AI 辅助范围见 [AI_USAGE](docs/AI_USAGE.md)。
 
 ## 主要结果
 
@@ -664,8 +683,26 @@ def main():
                'novel_test_views': sum(row['views'] for row in heights), 'evaluation_reports': 39,
                'averages': averages, 'findings': findings, 'submission': read(ROOT / 'configs/submission.json')}
     write_json(RESULTS / 'course_summary.json', summary)
-    (ROOT / 'PROGRESS.md').write_text('# 课程作业执行进度\n\n| 步骤 | 状态 | 结果 |\n|---|---|---|\n| 作业 1 清洗 | 完成 | 55,000 → 7,819 |\n| 共用程序 | 完成 | 固定配置、独立程序和命令 |\n| 作业 2 主实验 | 完成 | 10/10，960/960 相机，10 GIF |\n| 图像数与位姿对照 | 完成 | 9 次额外训练 |\n| 训练时长 | 完成 | 10 个物体，7k/30k |\n| 新高度 | 完成 | 10 个物体、360 张测试图 |\n| 报告与学习资料 | 完成 | docs/ 和总览页面 |\n| 提交信息 | 待填写 | 组号、成员贡献、GitHub 地址 |\n')
+    write_progress()
     print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+
+def write_progress():
+    (ROOT / 'PROGRESS.md').write_text('''# 课程作业执行进度
+
+| 步骤 | 状态 | 结果 |
+|---|---|---|
+| 作业 1 清洗 | 完成 | 55,000 → 7,819 |
+| 共用程序 | 完成 | 固定配置、独立程序和命令 |
+| 作业 2 主实验 | 完成 | 10/10，960/960 相机，10 GIF |
+| 图像数与位姿对照 | 完成 | 9 次额外训练 |
+| 训练时长 | 完成 | 10 个物体，7k/30k |
+| 新高度 | 完成 | 10 个物体、360 张测试图 |
+| 报告与学习资料 | 完成 | docs/ 和总览页面 |
+| 提交信息 | 已配置 | 第一组、成员1至4、等量分工、GitHub 地址 |
+| 正式提交报告 | 已完成 | Markdown、PDF；校验见 results/submission_verification.json |
+| GitHub 上传 | 尚未推送 | 目标仓库见 configs/submission.json |
+''')
 
 
 if __name__ == '__main__':
