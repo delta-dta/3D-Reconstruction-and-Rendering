@@ -7,6 +7,6 @@
   "min_faces": 500,
   "max_faces": 1000000,
   "max_file_bytes": 104857600,
-  "coarse_candidates": "/data/260010047/3d_homework/outputs/coarse_candidates.jsonl",
-  "coarse_summary": "/data/260010047/3d_homework/outputs/coarse_summary.json"
+  "coarse_candidates": "outputs/coarse_candidates.jsonl",
+  "coarse_summary": "outputs/coarse_summary.json"
 }

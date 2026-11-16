@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 
-ROOT = Path("/data/260010047/3d_homework")
+ROOT = Path(__file__).resolve().parents[1]
 CLEANED = ROOT / "cleaned"
 SHARDS = [f"000-{index:03d}" for index in range(11)]
 GALLERY_LIMIT = 200

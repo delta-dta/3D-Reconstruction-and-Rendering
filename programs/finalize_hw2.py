@@ -59,7 +59,7 @@ def main():
     repository = Path(config['gaussian_repo'])
     revisions = {}
     for name, path in [('3dgs', repository), ('rasterizer', repository / 'submodules/diff-gaussian-rasterization'), ('simple_knn', repository / 'submodules/simple-knn'), ('fused_ssim', repository / 'submodules/fused-ssim')]:
-        revisions[name] = subprocess.check_output(['git', '-c', 'safe.directory=*', '-C', str(path), 'rev-parse', 'HEAD'], text=True).strip()
+        revisions[name] = subprocess.check_output(['git', '-c', f'safe.directory={path.resolve()}', '-C', str(path), 'rev-parse', 'HEAD'], text=True).strip()
     environment = {'python': platform.python_version(), 'python_executable': sys.executable, 'torch': torch.__version__,
         'cuda_runtime': torch.version.cuda, 'gpu': torch.cuda.get_device_name(), 'pycolmap': pycolmap.__version__,
         'sfm_device': 'CPU', 'training_device': 'CUDA sm_120', 'repositories': revisions,
@@ -74,7 +74,7 @@ def main():
         f'<title>作业 2：{escape(name)}重建流程</title>',
         '<style>body{font:16px/1.7 system-ui;max-width:1200px;margin:30px auto;padding:0 20px;color:#222}img{max-width:100%;height:auto}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:8px;text-align:left}.pair{margin:20px 0}a{color:#1558a6}iframe{width:100%;height:740px;border:1px solid #ddd}</style>',
         f'<h1>{escape(name)}：图像 → SfM → 3DGS → 新视角渲染</h1>',
-        f'<p>对象 UID：{config["uid"]}。本页完成单物体的第 1～4 步，使用官方 3DGS 实现和真实训练结果。</p>',
+        f'<p>对象 UID：{config["uid"]}。本页展示多视角成像、SIFT/SfM、3DGS训练、留出评价与环绕动画的完整结果。</p>',
         '<h2>重建动画</h2><img src="reconstruction.gif" alt="3DGS 重建环绕动画">',
         '<p><a href="reconstruction.gif">下载 GIF</a> · <a href="summary.json">完整统计与设置</a> · <a href="environment.json">运行环境与代码版本</a></p>',
         '<table><tr><th>项目</th><th>结果</th></tr>',

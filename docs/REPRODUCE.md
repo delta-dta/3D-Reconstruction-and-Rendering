@@ -31,6 +31,8 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 
 正式清洗清单已保存在 `results/assignment1/`，后续重建可直接按清单准备源GLB。完整清洗参数在 `configs/`，实际筛选提示词与请求设置见 [PROMPTS](PROMPTS.md)。
 
+重新清洗时，在 `configs/cleaning.json` 中设置源数据的 `dataset_root`。清洗配置与启动脚本中的项目路径均以仓库根目录为基准；先激活 `3dvision`，再取消所需命令的注释执行。
+
 ## 作业 2 单物体与 10 物体主实验
 
 羊摆件的阶段脚本为 `run_hw2_render_lamb.sh`、`run_hw2_prepare_lamb.sh`、`run_hw2_sfm_lamb.sh`、`run_hw2_train_lamb.sh`、`run_hw2_evaluate_lamb.sh`、`run_hw2_finalize_lamb.sh`。它们现在调用共用的 `programs/*_hw2.py`。

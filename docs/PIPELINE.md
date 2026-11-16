@@ -97,4 +97,4 @@ python -B programs/verify_repository.py
 
 24/48/96视角、真实位姿、7k/30k和新高度实验的配置保存在 `configs/experiments/`；原始完整命令在 `scripts/run_hw2_ablations_*`、`run_hw2_checkpoints.sh`、`run_hw2_novel_views.sh` 中保留，条件与结果对应关系见 `EXPERIMENTS.md`。
 
-历史脚本保留了本机的执行路径；新的统一入口使用仓库位置和单独的路径配置。六个计算阶段共用同一份实现。
+阶段脚本保存正式实验的完整命令，均从仓库根目录、激活 `3dvision` 后运行；已完成命令以注释保留。统一入口使用仓库位置和单独的路径配置，六个计算阶段共用同一份实现。

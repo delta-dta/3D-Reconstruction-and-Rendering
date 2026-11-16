@@ -34,7 +34,7 @@ def main():
     metadata['experiment'] = config['experiment']
     metadata['source_output_dir'] = str(source)
     # RGBA is shared for inspection; SfM and training read the split RGB folders.
-    (data / 'rgba').symlink_to(source / 'data/rgba', target_is_directory=True)
+    (data / 'rgba').symlink_to((source / 'data/rgba').resolve(), target_is_directory=True)
     (data / 'metadata.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n')
     splits = {split: [frame['name'] for frame in metadata['frames'] if frame['split'] == split] for split in ['train', 'test']}
     (data / 'splits.json').write_text(json.dumps(splits, indent=2) + '\n')

@@ -1,7 +1,7 @@
 {
-  "input": "/data/260010047/3d_homework/outputs/material_candidates.jsonl",
-  "frames_dir": "/data/260010047/3d_homework/outputs/full_frames",
-  "manifest_dir": "/data/260010047/3d_homework/outputs/full_render",
+  "input": "outputs/material_candidates.jsonl",
+  "frames_dir": "outputs/full_frames",
+  "manifest_dir": "outputs/full_render",
   "scratch_root": "/tmp/objaverse_hw1_full",
   "workers": 6,
   "gpu_render_slots": 4,

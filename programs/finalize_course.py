@@ -89,21 +89,37 @@ def collect(course):
     return objects, controls
 
 
+def cleaning_submission_summary():
+    summary = read(ROOT / 'cleaned/summary.json')
+    summary['render_config'] = {key: summary['render_config'][key] for key in [
+        'resolution', 'samples', 'denoising', 'texture_limit', 'min_faces', 'max_faces',
+        'max_file_bytes', 'view_angles_degrees']}
+    summary['visual_filter_config'] = {key: summary['visual_filter_config'][key] for key in [
+        'engine', 'foreground_fraction_min', 'foreground_valid_views_min', 'foreground_erosion_pixels',
+        'gaussian_sigma', 'sift_count_min', 'endpoint', 'model', 'model_version_at_setup',
+        'image_detail', 'max_tokens', 'temperature', 'thinking', 'response_format', 'required_answers', 'prompt']}
+    summary['visual_api'] = {key: summary['visual_api'][key] for key in [
+        'engine', 'model_requested', 'model_version_at_setup', 'models_returned', 'requests']}
+    return summary
+
+
 def compact_results(objects, controls):
     from finalize_hw2 import write_viewer
     bank = RESULTS / 'assignment1'
     bank.mkdir(parents=True, exist_ok=True)
-    for name in ['summary.json', 'cleaned_models.jsonl', 'cleaned_models.csv', 'cleaned_uids.txt', 'hw2_candidates.jsonl']:
+    for name in ['cleaned_models.jsonl', 'cleaned_models.csv', 'cleaned_uids.txt', 'hw2_candidates.jsonl']:
         copy(ROOT / 'cleaned' / name, bank / name)
+    write_json(bank / 'summary.json', cleaning_submission_summary())
     selected = [json.loads(line) for line in (ROOT / 'cleaned/hw2_candidates.jsonl').read_text().splitlines()]
     selected_uids = {row['uid'] for row in selected}
     case = next(row for row in map(json.loads, (ROOT / 'cleaned/cleaned_models.jsonl').read_text().splitlines())
                 if row['uid'] == '5bda8ef98bfb4a908bd671b248ee22ba')
     credits = []
     metadata = {}
+    metadata_root = Path(read(ROOT / 'configs/pipeline.json')['dataset_root']) / 'metadata'
     for row in [*selected, case]:
         if row['shard'] not in metadata:
-            with gzip.open(Path('/mnt/aoss/datasets/Objaversev1.0/metadata') / (row['shard'] + '.json.gz'), 'rt') as source:
+            with gzip.open(metadata_root / (row['shard'] + '.json.gz'), 'rt') as source:
                 metadata[row['shard']] = json.load(source)
         record = metadata[row['shard']][row['uid']]
         user = record.get('user', {})

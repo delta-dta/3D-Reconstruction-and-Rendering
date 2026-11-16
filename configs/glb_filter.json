@@ -1,7 +1,7 @@
 {
-  "input": "/data/260010047/3d_homework/outputs/coarse_candidates.jsonl",
-  "output": "/data/260010047/3d_homework/outputs/material_candidates.jsonl",
-  "summary": "/data/260010047/3d_homework/outputs/material_summary.json",
+  "input": "outputs/coarse_candidates.jsonl",
+  "output": "outputs/material_candidates.jsonl",
+  "summary": "outputs/material_summary.json",
   "workers": 16,
   "min_faces": 500,
   "max_faces": 1000000,
