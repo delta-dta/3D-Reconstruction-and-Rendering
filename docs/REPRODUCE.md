@@ -2,14 +2,13 @@
 
 作业2现在提供统一入口 `programs/run_pipeline.py`。从新克隆仓库开始运行时，先看[PIPELINE](PIPELINE.md)：在 `configs/pipeline.json` 设置数据与工具位置，再执行六阶段完整流程。下面保留正式实验的环境、命令记录及对照实验说明。
 
-## 当前机器
+## 实验环境与工作目录
 
-项目根目录：`/data/260010047/3d_homework`。源数据：`/mnt/aoss/datasets/Objaversev1.0/`。GPU：RTX 5090，32 GB。Conda 环境：`/data/260010047/miniconda3/envs/3dvision`。
+正式实验使用RTX 5090（32 GB），Conda环境名为 `3dvision`。从仓库根目录执行下列命令；在 `configs/pipeline.json` 中设置Objaverse数据根目录与工具位置。
 
 ```bash
-source /data/260010047/miniconda3/etc/profile.d/conda.sh
+conda env create -f environment.yml
 conda activate 3dvision
-cd /data/260010047/3d_homework
 ```
 
 Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `environment.yml`，不继承系统 Python 的 site-packages。
@@ -20,7 +19,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 
 重新做实验时建议复制对应配置，明确改成一个新的输出目录，再把该配置的完整命令加入启动脚本。这样可以同时保留原有结果与修改后的实验。
 
-## 作业 1
+## 数据清洗
 
 | 顺序 | 启动脚本 | 主要输出 |
 |---|---|---|
@@ -30,7 +29,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 | 4 | `scripts/run_preview_deepseek.sh` | `cleaned/cleaned_models.jsonl` 与 UID 清单 |
 | 5 | `scripts/run_finalize_cleaning.sh` | CSV、页面、10 物体清单 |
 
-当前正式清洗结果完整，作业 2 可直接使用。要在全新目录重新调用 DeepSeek，需在 `ds_api_key` 配置密钥，并理解这一步会上传四视角图片和产生 API 费用；限额与端点在配置中。本次后续重建没有再次调用 API。
+正式清洗清单已保存在 `results/assignment1/`，后续重建可直接按清单准备源GLB。完整清洗参数在 `configs/`，实际筛选提示词与请求设置见 [PROMPTS](PROMPTS.md)。
 
 ## 作业 2 单物体与 10 物体主实验
 
@@ -49,7 +48,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 进度查看：
 
 ```bash
-/data/260010047/miniconda3/envs/3dvision/bin/python -B programs/course_status.py
+python -B programs/course_status.py
 ```
 
 训练日志包含 tqdm 的回车更新。查看进度优先读取 `training_progress.json`，避免用按行 tail 打印很长的进度条内容。
@@ -68,21 +67,17 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 
 位姿对照保持相同稀疏点，只设置真实训练外参。新高度评估通过 `model_dir` 明确读取主实验模型，并在独立目录保存图像与指标。
 
-机器人 24 图条件观察到部分相机未注册及几何退化。该条件明确设置 `require_all_registered=false`，训练只读取 SfM 最终返回模型中的相机；输入图仍保留 24 张，测试集不变。`robot_views24.json` 从图像执行 SfM，输出到 `data/sparse/0`，供训练使用。
-
-本次校验发现 COLMAP 的 `sfm/raw/0` 中间落盘模型与最终返回对象的相机数量不同，因此统一使用 API 最终返回对象导出；不能用 `raw/0` 替代训练输入。重新执行 SfM 时会清除 3DGS 的 `points3D.ply` 转换缓存，避免相机更新后仍使用旧点云。实际训练数量同时核对 `model/cameras.json`。首次触发全部注册检查的日志保留为 `sfm_initial.log`，修正后的单条件重算命令在 `scripts/rerun_robot_views24.sh`。
-
-机器人 48 图条件虽全部注册，仍有明显几何退化；各条件均保留实际恢复结果继续训练，统一在留出图像评估。正式 96 图基线恢复正确环绕相机结构。
+机器人24图与48图条件分别注册24/24和48/48张相机，对齐后的旋转误差中位数分别为66.976°和17.824°。各条件使用实际恢复结果训练，在相同留出视角上评价；正式96图基线恢复正确环绕相机结构。具体数据见 [EXPERIMENTS](EXPERIMENTS.md)。
 
 ## 新环境搭建
 
-1. 根据 `environment.yml` 创建 `3dvision`，或使用本机已有环境。
-2. 使用 CUDA 12.9、兼容 GCC（本机 13.3）。RTX 5090 构建设置为 `TORCH_CUDA_ARCH_LIST=12.0`。
-3. 按 `scripts/setup_hw2_tools.sh` 获取固定提交的官方 3DGS，只初始化三个计算子模块，应用标准头文件补丁，再安装扩展。
-4. 准备 Blender 4.5.3 Linux 版本至 `.tools/blender-4.5.3-linux-x64/`。本机额外的 libICE/libSM 位于 `.tools/system-libs/usr/lib/x86_64-linux-gnu/`，渲染启动命令为 Blender 单独设置 `LD_LIBRARY_PATH`。
+1. 根据 `environment.yml` 创建并激活 `3dvision`。
+2. 使用CUDA 12.9与兼容GCC；正式实验使用GCC 13.3。RTX 5090构建设置为 `TORCH_CUDA_ARCH_LIST=12.0`。
+3. 按 [PIPELINE](PIPELINE.md) 获取固定提交的官方3DGS，初始化三个计算子模块、应用标准头文件补丁并安装扩展。
+4. 准备Blender 4.5.3至 `.tools/blender-4.5.3-linux-x64/`，安装所需系统图形库。附加库目录可在 `configs/pipeline.json` 的 `blender_library_path` 中设置。
 5. 使源 Objaverse 文件位于配置指定路径。可先依照 `results/assignment1/cleaned_uids.txt` 准备所需对象，再复现单物体。
 
-历史启动脚本保留了本机执行时的绝对路径；新统一入口根据仓库位置解析路径，只需在 `configs/pipeline.json` 设置数据与工具位置。物体和对照配置中的项目路径已改为相对路径，从仓库根目录使用。预编译工具、源GLB、完整中间图像和模型检查点保存在本机，提交包包含代码、配置与可查看结果。
+阶段脚本记录正式实验命令。跨机器复现主流程使用统一入口 `programs/run_pipeline.py`，按仓库位置解析项目路径，在 `configs/pipeline.json` 中设置数据与工具位置。物体和对照配置中的项目路径均从仓库根目录解析。
 
 ## 结果保存在哪里
 
@@ -94,7 +89,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 | `outputs/ablations/` | 9 个对照条件的完整过程 |
 | `outputs/novel_views/` | 360 张新高度参考图及对照 |
 | `results/` | 可提交的匹配、GIF、指标、必要相机数据和图表 |
-| `docs/` | 课程报告、学习指南、实验与复现说明 |
+| `docs/` | 正式报告、实验、复现、提示词与资产署名 |
 
 必要条件都已写入配置。优先复制一个已有配置开展下一次实验，保持测试划分固定，再对照新的指标与误差图。
 
@@ -112,4 +107,4 @@ python -B programs/export_hw2_report.py
 
 第一条命令只同步组员、仓库、课程概览与结果首页，不重跑训练或改动实验指标。第二条从Markdown转换PDF，将图像嵌入文件，并将PDF内的相对文件链接转换成目标GitHub仓库中的路径。导出时核对十物体主表、UID、实际筛选提示词与中文文字提取；摘要在 `results/submission_verification.json`，逐页预览在 `outputs/report_export/`。
 
-7,000步恢复状态 `chkpnt7000.pth` 和第三方构建缓存已按要求清理；7k/30k高斯PLY、最终恢复状态与训练数据仍保留。阶段评价只读取PLY，不依赖已删除的7k恢复状态。需要重新编译时按 `setup_hw2_tools.sh` 中的安装命令执行。
+阶段评价读取7k/30k高斯PLY；最终恢复状态用于继续训练。扩展编译步骤见 [PIPELINE](PIPELINE.md)。

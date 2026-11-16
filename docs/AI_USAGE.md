@@ -4,7 +4,7 @@
 
 ## 作业 1 视觉筛选
 
-完整实际请求提示词、模型参数与端点见 `configs/preview_deepseek.json`；`docs/PROMPTS.md` 从该配置原样导出提示词。该文本作为同一条用户消息，与四视角拼图一起发送。API Key 位于本地 `ds_api_key`，不属于提交内容。
+完整实际请求提示词、模型参数与端点见 `configs/preview_deepseek.json`；`docs/PROMPTS.md` 从该配置原样导出提示词。该文本作为同一条用户消息，与四视角拼图一起发送。
 
 ## 编程助手的任务约束
 

@@ -78,13 +78,13 @@ flowchart LR
 ## 环境
 
 ```bash
-source /data/260010047/miniconda3/etc/profile.d/conda.sh
+conda env create -f environment.yml
 conda activate 3dvision
 ```
 
 RTX 5090；Python 3.12.3；PyTorch 2.8.0+cu129、torchvision 0.23.0+cu129；PyCOLMAP 3.13.0；Blender 4.5.3；CUDA 12.9、GCC 13.3、原生 sm_120 扩展。固定依赖在 `environment.yml`。
 
-官方 3DGS 提交 `54c035f7834b564019656c3e3fcc3646292f727d`。环境重建后，按 `scripts/setup_hw2_tools.sh` 获取代码、应用 `<cstdint>` 补丁、安装三个扩展。各子模块提交记录在 `results/hw2_*/environment.json`。
+官方 3DGS 提交 `54c035f7834b564019656c3e3fcc3646292f727d`。环境安装、代码获取、`<cstdint>` 补丁和三个扩展的安装步骤见 [PIPELINE](docs/PIPELINE.md)。各子模块提交记录在 `results/hw2_*/environment.json`。
 
 ## 代码与结果
 
@@ -93,17 +93,17 @@ programs/          清洗、渲染、SfM、训练、评价与报告程序
 configs/           筛选规则、完整提示词、对象、实验参数
 scripts/           无参数启动脚本；已完成命令以注释保留
 patches/           CUDA 12.9 标准头文件补丁
-docs/              报告、实验、学习、复现、资产署名
+docs/              报告、实验、复现、提示词与资产署名
 results/           可提交的 GIF、匹配数组、对照图、指标与图表
 outputs/           本机完整图像、数据库、模型与检查点（不入 Git）
 cleaned/           本机全量清洗清单与预览（不入 Git）
 .tools/            本机 Blender、官方 3DGS 和系统库（不入 Git）
 ```
 
-清洗输入为 `/mnt/aoss/datasets/Objaversev1.0/` 的 000-000～000-010，共 11 个分片。最终完整清单同时收集至 `results/assignment1/`，原始 GLB 保持不变。
+清洗输入为 Objaverse v1.0 的 000-000～000-010，共 11 个分片。清洗清单保存在 `results/assignment1/`；数据根目录在 `configs/pipeline.json` 的 `dataset_root` 中设置。
 
 作业 1 按 `run_coarse_filter` → `run_glb_filter` → `run_render_full` → `run_preview_deepseek` → `run_finalize_cleaning` 执行。作业 2 从 `configs/hw2_lamb.json` 和 `programs/render_hw2.py` 开始阅读，再依次看 prepare、reconstruct、train、evaluate。详细命令见[复现说明](docs/REPRODUCE.md)。
 
-API Key 位于本地 `ds_api_key`，由 `.gitignore` 排除。清洗正式请求使用 `deepseek-flash`，配置时版本记录为 `DeepSeek-V4.1-Flash-1017`；已记录用量按当时离峰/峰值参数估算 $1.0621/$2.1242，属于同一用量的两种估算。后续重建与实验不调用 API。
+清洗使用 DeepSeek-V4.1-Flash-1017（接口调用名 `deepseek-flash`），实际提示词与请求参数见 [PROMPTS](docs/PROMPTS.md)。
 
 资产来源和许可见 [ASSET_CREDITS](docs/ASSET_CREDITS.md)，第三方依赖见 [THIRD_PARTY](docs/THIRD_PARTY.md)，AI 辅助范围见 [AI_USAGE](docs/AI_USAGE.md)。

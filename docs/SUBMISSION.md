@@ -41,14 +41,4 @@ GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 
 `dist/coursework_submission.zip` 是本地已提交Git内容的完整快照，包含报告、源码、配置与精简结果，可作为补充附件或备份。下载后完整解压，再用浏览器打开根目录 `index.html`。需要保留 `results/`、`docs/` 与首页的相对位置，单独下载HTML不包含图片。PDF的图像已嵌入，可单独下载阅读；PDF文件链接指向GitHub。
 
-完整训练数据、数据库、PLY与最终检查点保留在本机 `outputs/`，用于学习和优化。工具、Conda、API Key、大型检查点和中间缓存不进入Git或提交包。资产署名和第三方来源见 `ASSET_CREDITS.md`、`THIRD_PARTY.md`。
-
-## 仓库推送
-
-后续修改完成后，使用已经配置好的origin推送：
-
-```bash
-git -c safe.directory=/data/260010047/3d_homework push -u origin main
-```
-
-不要将API Key、`.tools/`、Conda环境或整个 `outputs/` 加入提交。
+提交包提供代码、配置、报告与精简结果。完整训练图像、数据库、模型和检查点由运行流程生成，保存在 `outputs/`。资产署名和第三方来源见 `ASSET_CREDITS.md`、`THIRD_PARTY.md`。
