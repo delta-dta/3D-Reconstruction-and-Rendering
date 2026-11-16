@@ -7,9 +7,9 @@ nav a{display:inline-block;margin:5px 18px 5px 0}.tablewrap{overflow-x:auto}ifra
 button{padding:8px 14px;margin:8px 8px 15px 0;border:1px solid #afc5cc;background:white;border-radius:5px;cursor:pointer}.active{background:#28636b;color:white}
 code{font-size:13px;overflow-wrap:anywhere}@media print{body{max-width:none;background:white}nav,button{display:none}.card{break-inside:avoid}}</style><body>
 <h1>从 Objaverse 清洗到三维高斯重建</h1>
-<p>作业 1 的 55,000 个资产清洗，以及作业 2 的 10 个物体重建、匹配、环绕动画与流程对照实验。</p>
+<p>从55,000个资产筛选到10个物体的重建、匹配、环绕动画与流程对照实验。</p>
 <nav><a href="docs/HOMEWORK2_REPORT.pdf">正式报告 PDF</a><a href="docs/HOMEWORK2_REPORT.md">正式报告 Markdown</a></nav>
-<nav><a href="docs/COURSE_REPORT.md">课程报告</a><a href="docs/ASSIGNMENT1.md">作业 1 报告</a><a href="docs/EXPERIMENTS.md">对照实验</a><a href="docs/MATCHING_CASE.md">匹配歧义案例</a><a href="docs/LEARNING_GUIDE.md">学习指南</a><a href="docs/REPRODUCE.md">复现</a><a href="docs/PROMPTS.md">提示词</a><a href="docs/ASSET_CREDITS.md">资产署名</a></nav>
+<nav><a href="docs/PIPELINE.md">流程与运行</a><a href="docs/EXPERIMENTS.md">对照实验</a><a href="docs/MATCHING_CASE.md">匹配歧义案例</a><a href="docs/REPRODUCE.md">复现</a><a href="docs/PROMPTS.md">提示词</a><a href="docs/ASSET_CREDITS.md">资产署名</a></nav>
 <div class="stats"><div><b>7,819</b><br>清洗后资产</div><div><b>10 / 10</b><br>完整重建与 GIF</div><div><b>960 / 960</b><br>训练相机注册</div><div><b>9</b><br>额外对照训练</div><div><b>360</b><br>新高度测试图</div></div>
 <h2>10 个物体的重建结果</h2><p>每个物体使用独立模型。点击进入，可查看全部匹配、测试图像对照及交互式 SfM 点云。</p><div class="grid">
 <article class="card"><h3><a href="results/hw2_shell/index.html">贝壳标本</a></h3><img loading="lazy" src="results/hw2_shell/reconstruction.gif" alt="贝壳标本重建动画"><p class="sub">前景 PSNR 32.71 dB · SSIM 0.9927</p><a href="results/hw2_shell/index.html">匹配、点云与指标 →</a></article>
@@ -41,5 +41,5 @@ code{font-size:13px;overflow-wrap:anywhere}@media print{body{max-width:none;back
 <img loading="lazy" src="results/figures/novel_elevations.png" alt="新高度评估"><img loading="lazy" src="results/figures/training_loss.png" alt="训练损失曲线">
 <h2>作业 1 结果</h2><p>55,000 → 44,597 → 31,614 → 31,607 → 17,150 → 7,819。原始 GLB 保持原路径，输出清单与 SHA。</p>
 <nav><a href="results/assignment1/cleaned_models.csv">清洗 CSV</a><a href="results/assignment1/cleaned_uids.txt">UID 清单</a><a href="results/assignment1/summary.json">清洗统计</a></nav>
-<p>第一组 · 成员1、成员2、成员3、成员4 · <a href="https://github.com/delta-dta/3D-Reconstruction-and-Rendering">GitHub 仓库</a>。成员分工与网站提交方法见 <a href="docs/SUBMISSION.md">提交说明</a>。</p>
+<p>第一组 · 董天傲、黄瑞翔、陈泓逸、郭文涛 · <a href="https://github.com/delta-dta/3D-Reconstruction-and-Rendering">GitHub 仓库</a>。成员分工与网站提交方法见 <a href="docs/SUBMISSION.md">提交说明</a>。</p>
 <script>document.querySelectorAll('button[data-mode]').forEach(button=>button.onclick=()=>{document.querySelectorAll('button[data-mode]').forEach(b=>b.classList.toggle('active',b===button));document.getElementById('metric-title').textContent=button.dataset.mode==='fg'?'前景 PSNR':'全图 PSNR';document.querySelectorAll('td.psnr').forEach(cell=>cell.textContent=cell.dataset[button.dataset.mode]);});</script></body></html>

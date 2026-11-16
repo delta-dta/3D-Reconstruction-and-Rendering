@@ -10,6 +10,7 @@ h1 { font-size: 18pt; margin: 0 0 4mm; }
 h2 { font-size: 13pt; margin-top: 6mm; }
 h3 { font-size: 11pt; margin-top: 4mm; }
 p { margin: 2.5mm 0; orphans: 3; widows: 3; }
+h2 + p, h3 + p { break-after: avoid; }
 a { color: #333; text-decoration: underline; overflow-wrap: break-word; }
 table { width: 100%; border-collapse: collapse; margin: 3mm 0; font-size: 8.5pt; line-height: 1.45; break-inside: avoid; }
 thead { display: table-header-group; }

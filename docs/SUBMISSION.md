@@ -1,6 +1,6 @@
 # 第一组：作业2提交说明
 
-组号：**第一组**。成员代称：**成员1、成员2、成员3、成员4**。四人按相近工作量分配，各预计25%，具体任务见正式报告第1节及 `configs/submission.json`；提交前核对实际贡献。
+组号：**第一组**。成员：**董天傲、黄瑞翔、陈泓逸、郭文涛**。具体分工见正式报告第1节及 `configs/submission.json`。
 
 GitHub仓库：**https://github.com/delta-dta/3D-Reconstruction-and-Rendering**  
 Git克隆地址：`https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git`
@@ -13,7 +13,7 @@ Git克隆地址：`https://github.com/delta-dta/3D-Reconstruction-and-Rendering.
 网站备注可直接填写：
 
 ```text
-第一组：成员1、成员2、成员3、成员4。
+第一组：董天傲、黄瑞翔、陈泓逸、郭文涛。
 作业2采用SIFT/COLMAP + 3D Gaussian Splatting，完成10物体重建、匹配结果与10个GIF。
 GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 报告：HOMEWORK2_REPORT.pdf。代码、完整业务提示词、匹配结果与GIF见仓库。
@@ -28,7 +28,7 @@ GitHub：https://github.com/delta-dta/3D-Reconstruction-and-Rendering
 | 流程文档、分析与发现 | `docs/HOMEWORK2_REPORT.md`、`.pdf`；`docs/EXPERIMENTS.md` |
 | 完整代码与配置 | `programs/`、`configs/`、`scripts/`、`patches/`、`environment.yml` |
 | 统一pipeline入口 | `programs/run_pipeline.py`、`configs/pipeline.json`、`docs/PIPELINE.md` |
-| 作业1清洗数据来源 | `results/assignment1/` 的清洗清单、10物体UID与源SHA |
+| 数据清洗与资产来源 | `results/assignment1/` 的清洗清单、10物体UID与源SHA |
 | 全部业务提示词 | `configs/preview_deepseek.json`、`docs/PROMPTS.md`；AI辅助范围在 `docs/AI_USAGE.md` |
 | 全部10物体匹配 | `results/hw2_*/sfm/`：4张匹配图、完整验证图像对CSV、关键点与内点NPZ |
 | 每物体GIF | `results/hw2_*/reconstruction.gif`，共10个，各72帧 |

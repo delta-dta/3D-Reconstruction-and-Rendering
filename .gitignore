@@ -6,3 +6,11 @@ ds_api_key
 outputs/
 cleaned/
 dist/
+/example1.png
+/example2.png
+/作业要求.png
+/results/figures/*.pdf
+/docs/ASSIGNMENT1.md
+/docs/COURSE_REPORT.md
+/docs/LEARNING_GUIDE.md
+/PROGRESS.md

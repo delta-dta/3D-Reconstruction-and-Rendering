@@ -100,7 +100,7 @@ Python 程序使用该环境；Blender 使用自带 Python。环境定义在 `en
 
 ## 正式报告的 Markdown 与 PDF
 
-第一组的正式报告为 `docs/HOMEWORK2_REPORT.md`，导出文件为 `docs/HOMEWORK2_REPORT.pdf`。成员1～成员4的均衡分工和目标仓库记录在 `configs/submission.json`；成员为代称，分工在提交前核对实际贡献。
+第一组的正式报告为 `docs/HOMEWORK2_REPORT.md`，导出文件为 `docs/HOMEWORK2_REPORT.pdf`。组员姓名、分工和目标仓库记录在 `configs/submission.json`。
 
 PDF导出使用WeasyPrint 66.0，依赖系统Pango、Harfbuzz、Fontconfig和Noto CJK字体。新Ubuntu环境按官方安装说明准备 `libpango-1.0-0`、`libpangoft2-1.0-0`、`libharfbuzz0b`、`libharfbuzz-subset0` 和 `fonts-noto-cjk`，Python依赖在 `environment.yml` 与 `configs/report_requirements.txt` 中。
 

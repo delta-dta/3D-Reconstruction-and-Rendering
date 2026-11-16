@@ -1,6 +1,6 @@
 """Refresh submission metadata and entry pages without rerunning experiments."""
 
-from finalize_course import ROOT, collect, course_report, dashboard, read, readme, write_json, write_progress
+from finalize_course import ROOT, collect, course_averages, dashboard, object_pages, read, readme, write_json, write_progress
 
 
 def main():
@@ -10,9 +10,10 @@ def main():
     }
     rows = read(ROOT / 'results/metrics.json')
     objects, _ = collect(read(ROOT / 'configs/hw2_course.json'))
-    averages = course_report(objects, rows, summary['findings'])
+    averages = course_averages(rows)
     readme(rows, averages)
     dashboard(objects, rows, summary['findings'])
+    object_pages(objects)
     summary['submission'] = read(ROOT / 'configs/submission.json')
     write_json(ROOT / 'results/course_summary.json', summary)
     write_progress()

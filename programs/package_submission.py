@@ -1,13 +1,27 @@
 """Archive the committed course code, reports and compact results."""
 
 import hashlib
+from html.parser import HTMLParser
 import json
 from pathlib import Path
+import posixpath
 import subprocess
+from urllib.parse import unquote, urlsplit
 import zipfile
+
+import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 GIT = ['git', '-c', f'safe.directory={ROOT}', '-C', str(ROOT)]
+
+
+class References(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = []
+
+    def handle_starttag(self, tag, attrs):
+        self.targets.extend(value for key, value in attrs if key in {'href', 'src'} and value)
 
 
 def main():
@@ -35,9 +49,24 @@ def main():
     with zipfile.ZipFile(archive) as bundle:
         assert bundle.testzip() is None
         entries = len(bundle.infolist())
+        names = set(bundle.namelist())
+        checked_links = 0
+        for page in sorted(name for name in names if name.endswith(('.html', '.md'))):
+            content = bundle.read(page).decode('utf-8')
+            if page.endswith('.md'):
+                content = markdown.markdown(content, extensions=['tables', 'fenced_code', 'md_in_html'])
+            references = References()
+            references.feed(content)
+            for target in references.targets:
+                url = urlsplit(target)
+                if url.scheme or url.netloc or not url.path:
+                    continue
+                destination = posixpath.normpath(posixpath.join(posixpath.dirname(page), unquote(url.path)))
+                assert destination in names, f'File absent from submission: {page} -> {target}'
+                checked_links += 1
     (dist / 'SHA256SUMS').write_text(f'{digest}  {archive.name}\n')
     report = {'git_commit': revision, 'archive': archive.name, 'sha256': digest,
-              'bytes': archive.stat().st_size, 'archive_entries': entries,
+              'bytes': archive.stat().st_size, 'archive_entries': entries, 'local_links_checked': checked_links,
               'experiments_complete': True, 'group_and_repository': summary['submission'],
               'formal_report': {'markdown': formal['source'], 'pdf': formal['pdf'], 'pages': formal['pages']}}
     (dist / 'submission.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

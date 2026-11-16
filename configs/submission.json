@@ -2,26 +2,26 @@
   "group_number": "第一组",
   "members": [
     {
-      "name": "成员1",
+      "name": "董天傲",
       "contribution": "数据来源与清洗结果整理、多视角图像生成与划分；负责24/48/96视角数量实验及数据部分文档。",
       "workload_percent": 25
     },
     {
-      "name": "成员2",
+      "name": "黄瑞翔",
       "contribution": "SIFT特征、匹配、SfM相机恢复与匹配结果导出；负责真实位姿对照、几何误差分析及重建部分文档。",
       "workload_percent": 25
     },
     {
-      "name": "成员3",
+      "name": "陈泓逸",
       "contribution": "3DGS环境与训练配置、十物体优化及模型保存；负责7k/30k训练时长实验、训练曲线及优化部分文档。",
       "workload_percent": 25
     },
     {
-      "name": "成员4",
+      "name": "郭文涛",
       "contribution": "新视角评价、GIF与结果页面、指标汇总；负责新高度实验、报告合并排版、仓库组织及复现说明。",
       "workload_percent": 25
     }
   ],
-  "contribution_note": "成员1至成员4为指定代称；分工按相近工作量拟定，每人预计25%，提交前核对实际贡献。",
+  "contribution_note": "成员分工见正式报告第1节。",
   "github_url": "https://github.com/delta-dta/3D-Reconstruction-and-Rendering.git"
 }

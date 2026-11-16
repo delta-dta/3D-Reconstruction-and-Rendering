@@ -1,12 +1,12 @@
 # 三维视觉课程项目：Objaverse 清洗、SfM 与 3DGS
 
-已完成作业 1 的 **55,000 → 7,819** 资产清洗，以及作业 2 的 **10 个物体完整重建、10 个 GIF、全部匹配结果和流程对照实验**。
+已完成 **55,000 → 7,819** 资产筛选，以及 **10个物体的完整重建、10个GIF、全部匹配结果和流程对照实验**。
 
 **第一组** · GitHub：[https://github.com/delta-dta/3D-Reconstruction-and-Rendering](https://github.com/delta-dta/3D-Reconstruction-and-Rendering)
 
 **正式提交报告：[PDF](docs/HOMEWORK2_REPORT.pdf) · [Markdown 源文件](docs/HOMEWORK2_REPORT.md)**
 
-[结果总览](index.html) · [课程报告](docs/COURSE_REPORT.md) · [作业 1](docs/ASSIGNMENT1.md) · [对照实验](docs/EXPERIMENTS.md) · [学习指南](docs/LEARNING_GUIDE.md) · [复现](docs/REPRODUCE.md) · [提示词](docs/PROMPTS.md) · [提交说明](docs/SUBMISSION.md)
+[结果总览](index.html) · [Pipeline](docs/PIPELINE.md) · [对照实验](docs/EXPERIMENTS.md) · [复现](docs/REPRODUCE.md) · [提示词](docs/PROMPTS.md) · [提交说明](docs/SUBMISSION.md)
 
 另有一个[重复纹理造成位姿歧义的实际案例](docs/MATCHING_CASE.md)，用于理解“特征多”和“对应可靠”的区别。
 
@@ -26,14 +26,14 @@ python -B programs/run_pipeline.py --config configs/hw2_lamb.json
 
 ## 成员与分工
 
-| 成员 | 分工安排 | 预计工作量 |
-|---|---|---|
-| 成员1 | 数据来源与清洗结果整理、多视角图像生成与划分；负责24/48/96视角数量实验及数据部分文档。 | 25% |
-| 成员2 | SIFT特征、匹配、SfM相机恢复与匹配结果导出；负责真实位姿对照、几何误差分析及重建部分文档。 | 25% |
-| 成员3 | 3DGS环境与训练配置、十物体优化及模型保存；负责7k/30k训练时长实验、训练曲线及优化部分文档。 | 25% |
-| 成员4 | 新视角评价、GIF与结果页面、指标汇总；负责新高度实验、报告合并排版、仓库组织及复现说明。 | 25% |
+| 成员 | 分工 |
+|---|---|
+| 董天傲 | 数据来源与清洗结果整理、多视角图像生成与划分；负责24/48/96视角数量实验及数据部分文档。 |
+| 黄瑞翔 | SIFT特征、匹配、SfM相机恢复与匹配结果导出；负责真实位姿对照、几何误差分析及重建部分文档。 |
+| 陈泓逸 | 3DGS环境与训练配置、十物体优化及模型保存；负责7k/30k训练时长实验、训练曲线及优化部分文档。 |
+| 郭文涛 | 新视角评价、GIF与结果页面、指标汇总；负责新高度实验、报告合并排版、仓库组织及复现说明。 |
 
-成员1至成员4为指定代称；分工按相近工作量拟定，每人预计25%，提交前核对实际贡献。 AI 辅助范围见 [AI_USAGE](docs/AI_USAGE.md)。
+成员分工见正式报告第1节。 AI 辅助范围见 [AI_USAGE](docs/AI_USAGE.md)。
 
 ## 主要结果
 
