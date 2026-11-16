@@ -2,13 +2,13 @@
   "complete": true,
   "source": "docs/HOMEWORK2_REPORT.md",
   "pdf": "docs/HOMEWORK2_REPORT.pdf",
-  "pages": 11,
-  "pdf_bytes": 2773379,
+  "pages": 12,
+  "pdf_bytes": 3037592,
   "baseline_rows_verified": 10,
   "prompt_matches_actual_config": true,
   "prompt_document": "docs/PROMPTS.md",
-  "image_references": 15,
-  "local_references_checked": 45,
+  "image_references": 17,
+  "local_references_checked": 47,
   "clickable_pdf_links": 32,
   "github_url": "https://github.com/delta-dta/3D-Reconstruction-and-Rendering",
   "members": [
@@ -17,6 +17,6 @@
     "陈泓逸",
     "郭文涛"
   ],
-  "source_sha256": "b491900a81ca23394ee1a58347bb7b71022fc3471ede7e060a1cbfd53210c602",
-  "pdf_sha256": "d0b03ef22d24972e5b58d3c80ca1f640913e0487b6b42ad2253a8a9e6225a8b2"
+  "source_sha256": "0a6aea0b75932ef60feb6db4373bda8947cdc97287619c6de1d614b152643a28",
+  "pdf_sha256": "a978170b91361f881e48bd6e5bf64f3b315eea3b06729f9d5618461414d6cb7a"
 }

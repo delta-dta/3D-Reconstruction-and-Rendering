@@ -76,6 +76,22 @@ GitHub：[delta-dta/3D-Reconstruction-and-Rendering](https://github.com/delta-dt
 <figcaption>图2：羊形摆件跨高度的实际几何验证对应。为保证可读性，单张图最多绘制80条线；标题记录全部内点数，NPZ中保存所有内点。</figcaption>
 </figure>
 
+食品罐头的印刷标签与跑鞋的鞋面、鞋底提供了不同类型的局部特征。图3、4分别展示同高度下改变方位、同方位下改变高度的实际匹配，均沿用图2的抽样绘图方式。
+
+<figure markdown="1">
+
+![食品罐头不同方位的实际匹配](../results/hw2_can/sfm/matches/matches_r01_v11_r01_v14.jpg)
+
+<figcaption>图3：食品罐头的不同方位匹配，图像对为r01_v11与r01_v14。两图俯仰角均为15°、方位角相差27°，共有300组几何验证内点。对应主要分布在标签文字、数字及印刷边界上。</figcaption>
+</figure>
+
+<figure markdown="1">
+
+![彩色跑鞋跨高度的实际匹配](../results/hw2_shoe/sfm/matches/matches_r00_v01_r01_v01.jpg)
+
+<figcaption>图4：彩色跑鞋的跨高度匹配，图像对为r00_v01与r01_v01。两图方位相同，俯仰角从−20°变为15°，共有204组几何验证内点；鞋面图案、色块边界和鞋底细节在两视图中形成对应。</figcaption>
+</figure>
+
 ### 3.2 增量式 SfM 与坐标对齐
 
 所有训练视角共用一组标定的PINHOLE内参。增量SfM先从满足几何约束的初始图像对建立稀疏模型，三角化匹配点；再利用已有三维点与新图关键点的2D–3D对应，通过PnP注册新相机，并继续三角化和束调整。束调整联合优化相机外参与稀疏点，焦距和主点保持固定。由图像对应恢复的外参和三角化点构成3DGS的几何输入。
@@ -173,7 +189,7 @@ PSNR单位为dB，SSIM越大越好。下列10张总览均由训练后的高斯�
 <tr><td><b>机器人模型 / robot</b><br><img src="../results/hw2_robot/reconstruction_overview.jpg" alt="机器人八视角重建"></td><td><b>羊形陶质摆件 / lamb</b><br><img src="../results/hw2_lamb/reconstruction_overview.jpg" alt="羊形摆件八视角重建"></td></tr>
 </table>
 
-图3：10个物体的多方位重建。GIF入口与精确资产UID见“物体与结果文件”一节。
+图5：10个物体的多方位重建。GIF入口与精确资产UID见“物体与结果文件”一节。
 
 贝壳、石质物体和羊形摆件的表面细节在留出视角中较稳定。陶壶的主体与把手能够连续恢复，误差主要分布于细密环纹、磨损细节和轮廓附近，前景PSNR为18.923 dB。注册率描述相机恢复的完整程度，留出图像与误差图进一步描述纹理和轮廓的重建精度。
 
@@ -181,7 +197,7 @@ PSNR单位为dB，SSIM越大越好。下列10张总览均由训练后的高斯�
 
 ![十物体指标与重投影误差](../results/figures/baseline_metrics.png)
 
-<figcaption>图4：十物体的全图/前景PSNR及平均重投影误差。各物体的24张参考图、预测图和误差图在结果页中逐项列出。</figcaption>
+<figcaption>图6：十物体的全图/前景PSNR及平均重投影误差。各物体的24张参考图、预测图和误差图在结果页中逐项列出。</figcaption>
 </figure>
 
 ## 6. 哪些环节影响最终重建？
@@ -240,7 +256,7 @@ PSNR单位为dB，SSIM越大越好。下列10张总览均由训练后的高斯�
 
 ![视角数量、位姿和训练时长三组对照](../results/figures/ablation_results.png)
 
-<figcaption>图5：三个对照维度的前景PSNR。图像数量和位姿对照使用三个代表物体，训练时长对照覆盖全部10物体。</figcaption>
+<figcaption>图7：三个对照维度的前景PSNR。图像数量和位姿对照使用三个代表物体，训练时长对照覆盖全部10物体。</figcaption>
 </figure>
 
 ### 6.4 新高度：区分原测试与独立视角变化
@@ -257,7 +273,7 @@ PSNR单位为dB，SSIM越大越好。下列10张总览均由训练后的高斯�
 
 ![独立新高度测试](../results/figures/novel_elevations.png)
 
-<figcaption>图6：各物体在独立高度上的表现。0°、30°和60°的均值分别为29.438、30.785和29.835 dB，性能随高度呈非单调变化；新增视角改变了可见表面，逐物体曲线展示了训练覆盖与表面可见性共同影响的结果。</figcaption>
+<figcaption>图8：各物体在独立高度上的表现。0°、30°和60°的均值分别为29.438、30.785和29.835 dB，性能随高度呈非单调变化；新增视角改变了可见表面，逐物体曲线展示了训练覆盖与表面可见性共同影响的结果。</figcaption>
 </figure>
 
 ### 6.5 匹配歧义案例与综合发现
