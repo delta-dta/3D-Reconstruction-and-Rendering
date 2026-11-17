@@ -3,7 +3,7 @@
   "pdf": "docs/HOMEWORK2_REPORT.pdf",
   "stylesheet": "configs/report_style.css",
   "preview_dir": "outputs/report_export",
-  "title": "第一组｜作业2：三维重建与渲染",
+  "title": "第一组｜作业2：从多视角图像到新视角渲染",
   "author": "第一组：董天傲、黄瑞翔、陈泓逸、郭文涛",
   "github_branch": "main"
 }

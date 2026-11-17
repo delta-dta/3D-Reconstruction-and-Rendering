@@ -3,7 +3,7 @@
   "source": "docs/HOMEWORK2_REPORT.md",
   "pdf": "docs/HOMEWORK2_REPORT.pdf",
   "pages": 12,
-  "pdf_bytes": 3037592,
+  "pdf_bytes": 3033921,
   "baseline_rows_verified": 10,
   "prompt_matches_actual_config": true,
   "prompt_document": "docs/PROMPTS.md",
@@ -17,6 +17,6 @@
     "陈泓逸",
     "郭文涛"
   ],
-  "source_sha256": "0a6aea0b75932ef60feb6db4373bda8947cdc97287619c6de1d614b152643a28",
-  "pdf_sha256": "a978170b91361f881e48bd6e5bf64f3b315eea3b06729f9d5618461414d6cb7a"
+  "source_sha256": "0ee9b9092ce1b370e1b8d78b0292cab8b3528544300e857c01944f7d595a59b3",
+  "pdf_sha256": "75b82f9a3b3b8f96edfd3f6913603b5d1fd2ce729b1481413537092c7aa8905e"
 }
